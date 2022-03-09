@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane prefHeight="610.0" prefWidth="991.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lab5.HelloController">
+   <children>
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="946.0">
+         <children>
+            <TabPane layoutX="45.0" layoutY="39.0" prefHeight="532.0" prefWidth="872.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab text="Клиенты">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="tvlClient" layoutX="10.0" layoutY="23.0" prefHeight="385.0" prefWidth="853.0">
+                                <columns>
+                                  <TableColumn fx:id="tcClientId" prefWidth="101.0" text="Номер клиента" />
+                                  <TableColumn fx:id="tcStaffId" prefWidth="124.0" text="Номер сотрудника" />
+                                    <TableColumn fx:id="tcName" prefWidth="126.0" text="Имя" />
+                                    <TableColumn fx:id="tcPatronymic" prefWidth="175.0" text="Отчество" />
+                                    <TableColumn fx:id="tcSurname" prefWidth="103.0" text="Фамилия" />
+                                    <TableColumn fx:id="tcAddress" minWidth="0.0" prefWidth="124.0" text="Адерс" />
+                                    <TableColumn fx:id="tcPhoneNumber" minWidth="9.0" prefWidth="99.0" text="Телефон" />
+                                </columns>
+                              </TableView>
+                              <Button fx:id="btnClientAdd" layoutX="14.0" layoutY="431.0" mnemonicParsing="false" onAction="#btnClientAddClick" prefHeight="45.0" prefWidth="134.0" text="Добавить клиента" textAlignment="CENTER" wrapText="true" />
+                              <Button fx:id="btnClientEdit" layoutX="176.0" layoutY="431.0" mnemonicParsing="false" onAction="#btnClientEditClick" prefHeight="47.0" prefWidth="113.0" text="Редактировать клиента" textAlignment="CENTER" wrapText="true" />
+                              <Button fx:id="btnClientDelete" layoutX="312.0" layoutY="431.0" mnemonicParsing="false" onAction="#btnClientDeleteClick" prefHeight="47.0" prefWidth="133.0" text="Удалить клиента" textAlignment="CENTER" wrapText="true" />
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab text="Абонименты">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="tvClubCard" layoutX="18.0" layoutY="14.0" prefHeight="410.0" prefWidth="836.0">
+                                <columns>
+                                  <TableColumn fx:id="tcCardId" prefWidth="140.0" text="Номер Карты" />
+                                    <TableColumn fx:id="tcClientCardId" prefWidth="175.0" text="Номер клиента" />
+                                    <TableColumn fx:id="tcServiceId" prefWidth="181.0" text="Номер услуги" />
+                                  <TableColumn fx:id="tcPrice" prefWidth="130.0" text="Стоимость" />
+                                    <TableColumn fx:id="tcStartDate" prefWidth="111.0" text="Начало" />
+                                    <TableColumn fx:id="tcEndCard" prefWidth="98.0" text="Конец" />
+                                </columns>
+                              </TableView>
+                              <Button fx:id="btnCardAdd" layoutX="30.0" layoutY="443.0" mnemonicParsing="false" onAction="#btnCardAddClick" prefHeight="43.0" prefWidth="100.0" text="Добавить абонимент" textAlignment="CENTER" wrapText="true" />
+                              <Button fx:id="btnCardEdit" layoutX="157.0" layoutY="443.0" mnemonicParsing="false" onAction="#btnCardEditClick" prefHeight="43.0" prefWidth="100.0" text="Изменить абонимент" textAlignment="CENTER" wrapText="true" />
+                              <Button fx:id="btnCardDelete" layoutX="281.0" layoutY="443.0" mnemonicParsing="false" onAction="#btnCardDeleteClick" prefHeight="43.0" prefWidth="100.0" text="Удалить абонимент" textAlignment="CENTER" wrapText="true" />
+                           </children></AnchorPane>
+                  </content>
+                </Tab>
+                  <Tab text="Сотрудники">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                     </content>
+                  </Tab>
+                  <Tab text="Рассписание">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                     </content>
+                  </Tab>
+                  <Tab text="Услуги">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                     </content>
+                  </Tab>
+                  <Tab text="Залы">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                     </content>
+                  </Tab>
+              </tabs>
+            </TabPane>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

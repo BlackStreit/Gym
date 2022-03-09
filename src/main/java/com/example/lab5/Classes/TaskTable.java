@@ -1,0 +1,83 @@
+package com.example.lab5.Classes;
+
+import java.time.LocalDate;
+
+public class TaskTable {
+    //Номер
+    private int number;
+    //Номер сотрудника
+    private int codeStaff;
+    //Номер клиента
+    private int codeClient;
+    //Номер зала
+    private int codeHall;
+    //Дата
+    private LocalDate date;
+    //Продолжительность
+    private int duration;
+
+    public TaskTable(int number, int codeEmployee, int codeClient, int codeRoom, LocalDate date, int duration) {
+        this.number = number;
+        this.codeStaff = codeEmployee;
+        this.codeClient = codeClient;
+        this.codeHall = codeRoom;
+        this.date = date;
+        this.duration = duration;
+    }
+
+    public TaskTable(){
+        this.number = 0;
+        this.codeStaff = 0;
+        this.codeClient = 0;
+        this.codeHall = 0;
+        this.date = LocalDate.now();
+        this.duration = 0;
+    }
+    public int getCodeClient() {
+        return codeClient;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
+    public int getCodeStaff() {
+        return codeStaff;
+    }
+
+    public void setCodeStaff(int codeStaff) {
+        this.codeStaff = codeStaff;
+    }
+
+    public void setCodeClient(int codeClient) {
+        this.codeClient = codeClient;
+    }
+
+    public int getCodeHall() {
+        return codeHall;
+    }
+
+    public void setCodeHall(int codeHall) {
+        this.codeHall = codeHall;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+}
