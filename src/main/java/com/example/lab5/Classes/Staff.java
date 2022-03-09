@@ -1,45 +1,45 @@
 package com.example.lab5.Classes;
 
 public class Staff {
-    private int scheduleId;
+    private int serviceId;
     private int staffId;
     private String address;
     private String phoneNumber;
     private int workExperience;
-    private int salsry;
+    private int salary;
     private String name;
     private String patronymic;
     private String surname;
 
     public Staff(int scheduleId, int staffId, String address, String phoneNumber, int workExperience, int salsry, String name, String patronymic, String surname) {
-        this.scheduleId = scheduleId;
+        this.serviceId = scheduleId;
         this.staffId = staffId;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.workExperience = workExperience;
-        this.salsry = salsry;
+        this.salary = salsry;
         this.name = name;
         this.patronymic = patronymic;
         this.surname = surname;
     }
 
     public Staff() {
-        this.scheduleId = 0;
+        this.serviceId = 0;
         this.staffId = 0;
         this.address = "address";
         this.phoneNumber = "phoneNumber";
         this.workExperience = 0;
-        this.salsry = 0;
+        this.salary = 0;
         this.name = "name";
         this.patronymic = "patronymic";
         this.surname = "surname";
     }
-    public int getScheduleId() {
-        return scheduleId;
+    public int getServiceId() {
+        return serviceId;
     }
 
-    public void setScheduleId(int scheduleId) {
-        this.scheduleId = scheduleId;
+    public void setServiceId(int serviceId) {
+        this.serviceId = serviceId;
     }
 
     public int getStaffId() {
@@ -74,12 +74,12 @@ public class Staff {
         this.workExperience = workExperience;
     }
 
-    public int getSalsry() {
-        return salsry;
+    public int getSalary() {
+        return salary;
     }
 
-    public void setSalsry(int salsry) {
-        this.salsry = salsry;
+    public void setSalary(int salary) {
+        this.salary = salary;
     }
 
     public String getName() {

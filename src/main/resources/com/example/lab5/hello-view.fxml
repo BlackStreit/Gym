@@ -21,7 +21,7 @@
                               <TableView fx:id="tvlClient" layoutX="10.0" layoutY="23.0" prefHeight="385.0" prefWidth="853.0">
                                 <columns>
                                   <TableColumn fx:id="tcClientId" prefWidth="101.0" text="Номер клиента" />
-                                  <TableColumn fx:id="tcStaffId" prefWidth="124.0" text="Номер сотрудника" />
+                                  <TableColumn fx:id="tcStaffClientId" prefWidth="124.0" text="Номер сотрудника" />
                                     <TableColumn fx:id="tcName" prefWidth="126.0" text="Имя" />
                                     <TableColumn fx:id="tcPatronymic" prefWidth="175.0" text="Отчество" />
                                     <TableColumn fx:id="tcSurname" prefWidth="103.0" text="Фамилия" />
@@ -44,7 +44,7 @@
                                 <columns>
                                   <TableColumn fx:id="tcCardId" prefWidth="140.0" text="Номер Карты" />
                                     <TableColumn fx:id="tcClientCardId" prefWidth="175.0" text="Номер клиента" />
-                                    <TableColumn fx:id="tcServiceId" prefWidth="181.0" text="Номер услуги" />
+                                    <TableColumn fx:id="tcServiceClubId" prefWidth="181.0" text="Номер услуги" />
                                   <TableColumn fx:id="tcPrice" prefWidth="130.0" text="Стоимость" />
                                     <TableColumn fx:id="tcStartDate" prefWidth="111.0" text="Начало" />
                                     <TableColumn fx:id="tcEndCard" prefWidth="98.0" text="Конец" />
@@ -56,24 +56,80 @@
                            </children></AnchorPane>
                   </content>
                 </Tab>
-                  <Tab text="Сотрудники">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                     </content>
-                  </Tab>
                   <Tab text="Рассписание">
                      <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                     </content>
-                  </Tab>
-                  <Tab text="Услуги">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="tvTaskTable" layoutX="23.0" layoutY="23.0" prefHeight="400.0" prefWidth="841.0">
+                                <columns>
+                                  <TableColumn fx:id="tcNumber" prefWidth="75.0" text="Номер" />
+                                  <TableColumn fx:id="tcCodeStaff" prefWidth="131.0" text="Номер сотрудника" />
+                                    <TableColumn fx:id="tcCodeClient" prefWidth="152.0" text="Номер клиента" />
+                                    <TableColumn fx:id="tcCodeHall" prefWidth="176.0" text="Номер зала" />
+                                    <TableColumn fx:id="tcDate" prefWidth="145.0" text="Дата" />
+                                    <TableColumn fx:id="tcDuration" prefWidth="161.0" text="Продолжительность" />
+                                </columns>
+                              </TableView>
+                              <Button fx:id="btnTaskAdd" layoutX="31.0" layoutY="436.0" mnemonicParsing="false" onAction="#btnTaskAddClick" prefHeight="50.0" prefWidth="102.0" text="Добавить занятие" textAlignment="CENTER" wrapText="true" />
+                              <Button fx:id="btnTaskEdit" layoutX="155.0" layoutY="436.0" mnemonicParsing="false" onAction="#btnTaskEditClick" prefHeight="50.0" prefWidth="102.0" text="Добавить занятие" textAlignment="CENTER" wrapText="true" />
+                              <Button fx:id="btnTaskDelete" layoutX="280.0" layoutY="436.0" mnemonicParsing="false" onAction="#btnTaskDeleteClick" prefHeight="50.0" prefWidth="102.0" text="Добавить занятие" textAlignment="CENTER" wrapText="true" />
+                           </children></AnchorPane>
                      </content>
                   </Tab>
                   <Tab text="Залы">
                      <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="tvHall" layoutX="26.0" layoutY="22.0" prefHeight="375.0" prefWidth="821.0">
+                                <columns>
+                                  <TableColumn fx:id="tcHall" prefWidth="414.0" text="Номер зала" />
+                                  <TableColumn fx:id="tcHallName" prefWidth="406.0" text="Название зала" />
+                                </columns>
+                              </TableView>
+                              <Button fx:id="btnHallAdd" layoutX="26.0" layoutY="413.0" mnemonicParsing="false" onAction="#btnHallAddClick" prefHeight="60.0" prefWidth="105.0" text="Добавить зал" textAlignment="CENTER" wrapText="true" />
+                              <Button fx:id="btnHallDelete" layoutX="283.0" layoutY="413.0" mnemonicParsing="false" onAction="#btnHallDeleteClick" prefHeight="60.0" prefWidth="105.0" text="Удалить зал" textAlignment="CENTER" wrapText="true" />
+                              <Button fx:id="btnHallEdit" layoutX="160.0" layoutY="413.0" mnemonicParsing="false" onAction="#btnHallEditClick" prefHeight="60.0" prefWidth="105.0" text="Редактировать зал" textAlignment="CENTER" wrapText="true" />
+                           </children></AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab text="Сотрудники">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="tvStaff" layoutX="14.0" layoutY="22.0" prefHeight="392.0" prefWidth="851.0">
+                                <columns>
+                                  <TableColumn fx:id="tcStaffId" prefWidth="94.0" text="ID сотрудника" />
+                                  <TableColumn fx:id="tcStaffServiceId" prefWidth="89.0" text="ID услуги" />
+                                    <TableColumn fx:id="tcStaffName" prefWidth="78.0" text="Имя" />
+                                    <TableColumn fx:id="tcStaffPatronymic" prefWidth="106.0" text="Отчество" />
+                                    <TableColumn fx:id="tcStaffSurname" prefWidth="117.0" text="Фамилия" />
+                                    <TableColumn fx:id="tcStaffAddress" prefWidth="90.0" text="Адрес" />
+                                    <TableColumn fx:id="tcStaffPhone" prefWidth="96.0" text="Телефон" />
+                                    <TableColumn fx:id="tcStaffExp" prefWidth="73.0" text="Опыт" />
+                                    <TableColumn fx:id="tcStaffSalary" prefWidth="107.0" text="Оплата" />
+                                </columns>
+                              </TableView>
+                              <Button fx:id="btnStaffAdd" layoutX="29.0" layoutY="442.0" mnemonicParsing="false" onAction="#btnStaffAddClick" prefHeight="44.0" prefWidth="97.0" text="Добавить сотрудника" textAlignment="CENTER" wrapText="true" />
+                              <Button fx:id="btnStaffEdit" layoutX="158.0" layoutY="442.0" mnemonicParsing="false" onAction="#btnStaffEditClick" prefHeight="44.0" prefWidth="102.0" text="Редактировать сотрудника" textAlignment="CENTER" wrapText="true" />
+                              <Button fx:id="btnStaffDelete" layoutX="292.0" layoutY="442.0" mnemonicParsing="false" onAction="#btnStaffDeleteClick" prefHeight="44.0" prefWidth="97.0" text="Удалить сотрудника" textAlignment="CENTER" wrapText="true" />
+                           </children></AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab text="Услуги">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="tvService" layoutX="35.0" layoutY="37.0" prefHeight="359.0" prefWidth="822.0">
+                                <columns>
+                                  <TableColumn fx:id="tcServiceId" prefWidth="258.0" text="Номер услуги" />
+                                  <TableColumn fx:id="tcServiceTitle" prefWidth="281.0" text="Название услуги" />
+                                    <TableColumn fx:id="tcServiceCost" prefWidth="282.0" text="Цена услуги" />
+                                </columns>
+                              </TableView>
+                              <Button fx:id="btnServiceAdd" layoutX="53.0" layoutY="426.0" mnemonicParsing="false" onAction="#btnServiceAddClick" prefHeight="50.0" prefWidth="98.0" text="Добавить услугу" textAlignment="CENTER" wrapText="true" />
+                              <Button fx:id="btnServiceDelete" layoutX="301.0" layoutY="426.0" mnemonicParsing="false" onAction="#btnServiceDeleteClick" prefHeight="50.0" prefWidth="98.0" text="Удалить услугу" textAlignment="CENTER" wrapText="true" />
+                              <Button fx:id="btnServiceEdit" layoutX="173.0" layoutY="426.0" mnemonicParsing="false" onAction="#btnServiceEditlick" prefHeight="50.0" prefWidth="98.0" text="Редактировать услугу" textAlignment="CENTER" wrapText="true" />
+                           </children></AnchorPane>
                      </content>
                   </Tab>
               </tabs>

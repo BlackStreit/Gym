@@ -1,16 +1,16 @@
 package com.example.lab5.Classes;
 
-public class Schedule {
+public class Service {
     private int id;
     private String title;
     private int cost;
 
-    public Schedule(int id, String title, int cost) {
+    public Service(int id, String title, int cost) {
         this.id = id;
         this.title = title;
         this.cost = cost;
     }
-    public Schedule(){
+    public Service(){
         this.id =0;
         this.title = "title";
         this.cost = 0;

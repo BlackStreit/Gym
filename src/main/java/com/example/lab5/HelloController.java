@@ -1,6 +1,6 @@
 package com.example.lab5;
 
-import com.example.lab5.Classes.Client;
+import com.example.lab5.Classes.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -8,13 +8,14 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class HelloController implements Initializable {
     //Работа с клиентом
     public TableView<Client> tvlClient;
     public TableColumn<Integer, Client> tcClientId;
-    public TableColumn<Integer, Client> tcStaffId;
+    public TableColumn<Integer, Client> tcStaffClientId;
     public TableColumn<String, Client> tcName;
     public TableColumn<String, Client> tcPatronymic;
     public TableColumn<String, Client> tcSurname;
@@ -25,16 +26,61 @@ public class HelloController implements Initializable {
     public Button btnClientDelete;
     
     //Работа с абониментом
-    public TableView tvClubCard;
-    public TableColumn tcCardId;
-    public TableColumn tcServiceId;
-    public TableColumn tcClientCardId;
-    public TableColumn tcPrice;
-    public TableColumn tcStartDate;
-    public TableColumn tcEndCard;
+    public TableView<ClubCard> tvClubCard;
+    public TableColumn<Integer, ClubCard> tcCardId;
+    public TableColumn<Integer, ClubCard> tcServiceClubId;
+    public TableColumn<Integer, ClubCard> tcClientCardId;
+    public TableColumn<Integer, ClubCard> tcPrice;
+    public TableColumn<LocalDate, ClubCard> tcStartDate;
+    public TableColumn<LocalDate, ClubCard> tcEndCard;
     public Button btnCardAdd;
     public Button btnCardEdit;
     public Button btnCardDelete;
+    
+    //Работа с расписанием
+    public TableView<TaskTable> tvTaskTable;
+    public TableColumn<Integer, TaskTable> tcNumber;
+    public TableColumn<Integer, TaskTable> tcCodeStaff;
+    public TableColumn<Integer, TaskTable> tcCodeClient;
+    public TableColumn<Integer, TaskTable> tcCodeHall;
+    public TableColumn<LocalDate, TaskTable> tcDate;
+    public TableColumn<Integer, TaskTable> tcDuration;
+    public Button btnTaskAdd;
+    public Button btnTaskEdit;
+    public Button btnTaskDelete;
+
+    //Работа с услугами
+    public TableView<Service> tvService;
+    public TableColumn<Integer, Service> tcServiceId;
+    public TableColumn<Integer, Service> tcServiceTitle;
+    public TableColumn<Integer, Service> tcServiceCost;
+    public Button btnServiceAdd;
+    public Button btnServiceDelete;
+    public Button btnServiceEdit;
+
+    //Работа с залами
+    public TableView<Hall> tvHall;
+    public TableColumn<Integer, Hall> tcHall;
+    public TableColumn<String, Hall> tcHallName;
+    public Button btnHallAdd;
+    public Button btnHallDelete;
+    public Button btnHallEdit;
+
+
+
+    public TableView<Staff> tvStaff;
+    public TableColumn<Integer, Staff> tcStaffId;
+    public TableColumn<Integer, Staff>  tcStaffServiceId;
+    public TableColumn<String, Staff>  tcStaffName;
+    public TableColumn<String, Staff>  tcStaffPatronymic;
+    public TableColumn<String, Staff>  tcStaffSurname;
+    public TableColumn<String, Staff>  tcStaffAddress;
+    public TableColumn<String, Staff>  tcStaffPhone;
+    public TableColumn<Integer, Staff> tcStaffExp;
+    public TableColumn<Integer, Staff> tcStaffSalary;
+    public Button btnStaffAdd;
+    public Button btnStaffEdit;
+    public Button btnStaffDelete;
 
 
     public void btnClientAddClick(ActionEvent actionEvent) {
@@ -58,5 +104,41 @@ public class HelloController implements Initializable {
     }
 
     public void btnCardDeleteClick(ActionEvent actionEvent) {
+    }
+
+    public void btnTaskAddClick(ActionEvent actionEvent) {
+    }
+
+    public void btnTaskEditClick(ActionEvent actionEvent) {
+    }
+
+    public void btnTaskDeleteClick(ActionEvent actionEvent) {
+    }
+
+    public void btnServiceAddClick(ActionEvent actionEvent) {
+    }
+
+    public void btnServiceDeleteClick(ActionEvent actionEvent) {
+    }
+
+    public void btnServiceEditlick(ActionEvent actionEvent) {
+    }
+
+    public void btnHallAddClick(ActionEvent actionEvent) {
+    }
+
+    public void btnHallDeleteClick(ActionEvent actionEvent) {
+    }
+
+    public void btnHallEditClick(ActionEvent actionEvent) {
+    }
+
+    public void btnStaffAddClick(ActionEvent actionEvent) {
+    }
+
+    public void btnStaffEditClick(ActionEvent actionEvent) {
+    }
+
+    public void btnStaffDeleteClick(ActionEvent actionEvent) {
     }
 }
