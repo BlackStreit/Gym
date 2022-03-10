@@ -1,6 +1,7 @@
 module com.example.lab5 {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.sql;
 
 
     opens com.example.lab5 to javafx.fxml;

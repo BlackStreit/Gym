@@ -1,16 +1,19 @@
 package com.example.lab5.Classes;
 
+import com.example.lab5.DataBase.DataBase;
+
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class ClubCard {
     private int cardId;
-    private LocalDate startCard;
-    private LocalDate endCard;
+    private Date startCard;
+    private Date endCard;
     private int price;
     private int serviceId;
     private int clientId;
 
-    public ClubCard(int cardId, LocalDate startCard, LocalDate endCard, int price, int serviceId, int clientId) {
+    public ClubCard(int cardId, Date startCard, Date endCard, int price, int serviceId, int clientId) {
         this.cardId = cardId;
         this.startCard = startCard;
         this.endCard = endCard;
@@ -21,8 +24,8 @@ public class ClubCard {
 
     public ClubCard() {
         this.cardId = 0;
-        this.startCard = LocalDate.now();
-        this.endCard = LocalDate.now().plusDays(2);
+        this.startCard = Date.valueOf(LocalDate.now());
+        this.endCard = Date.valueOf(LocalDate.now().plusDays(2));
         this.price = 0;
         this.serviceId = 0;
         this.clientId = 0;
@@ -36,19 +39,19 @@ public class ClubCard {
         this.cardId = cardId;
     }
 
-    public LocalDate getStartCard() {
+    public Date getStartCard() {
         return startCard;
     }
 
-    public void setStartCard(LocalDate startCard) {
+    public void setStartCard(Date startCard) {
         this.startCard = startCard;
     }
 
-    public LocalDate getEndCard() {
+    public Date getEndCard() {
         return endCard;
     }
 
-    public void setEndCard(LocalDate endCard) {
+    public void setEndCard(Date endCard) {
         this.endCard = endCard;
     }
 

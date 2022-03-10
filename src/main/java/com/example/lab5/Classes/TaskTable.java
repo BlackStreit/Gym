@@ -1,6 +1,7 @@
 package com.example.lab5.Classes;
 
 import java.time.LocalDate;
+import java.sql.Date;
 
 public class TaskTable {
     //Номер
@@ -12,11 +13,11 @@ public class TaskTable {
     //Номер зала
     private int codeHall;
     //Дата
-    private LocalDate date;
+    private Date date;
     //Продолжительность
     private int duration;
 
-    public TaskTable(int number, int codeEmployee, int codeClient, int codeRoom, LocalDate date, int duration) {
+    public TaskTable(int number, int codeEmployee, int codeClient, int codeRoom, Date date, int duration) {
         this.number = number;
         this.codeStaff = codeEmployee;
         this.codeClient = codeClient;
@@ -30,7 +31,7 @@ public class TaskTable {
         this.codeStaff = 0;
         this.codeClient = 0;
         this.codeHall = 0;
-        this.date = LocalDate.now();
+        this.date = Date.valueOf(LocalDate.now());
         this.duration = 0;
     }
     public int getCodeClient() {
@@ -65,11 +66,11 @@ public class TaskTable {
         this.codeHall = codeHall;
     }
 
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
