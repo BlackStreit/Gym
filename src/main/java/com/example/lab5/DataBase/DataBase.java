@@ -5,6 +5,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import com.example.lab5.Classes.*;
 import javafx.collections.FXCollections;
@@ -116,7 +119,6 @@ public class DataBase {
     public static ObservableList<Hall> getHall(){
         ObservableList<Hall> halls =FXCollections.observableArrayList();
         String sql = "SELECT * FROM Hall;";
-        String result = "";
         try {
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()){
@@ -127,6 +129,8 @@ public class DataBase {
             }
 
         } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return halls;
@@ -142,6 +146,8 @@ public class DataBase {
             }
 
         } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return hall;
@@ -160,6 +166,19 @@ public class DataBase {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public static ObservableList<Integer> getHallId(){
+        ObservableList<Integer> ids = FXCollections.observableArrayList();
+        var sql = "select hallId from Hall;";
+        try {
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()){
+                ids.add(resultSet.getInt("hallId"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ids;
     }
 
     public static void addClients(Client client){

@@ -26,7 +26,10 @@ public class Hall {
         return hallName;
     }
 
-    public void setHallName(String hallName) {
+    public void setHallName(String hallName) throws Exception {
+        if(hallName.length()==0){
+            throw new Exception("Пусте значение");
+        }
         this.hallName = hallName;
     }
 

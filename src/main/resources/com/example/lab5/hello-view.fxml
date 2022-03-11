@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane prefHeight="610.0" prefWidth="991.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lab5.HelloController">
+<AnchorPane prefHeight="610.0" prefWidth="991.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lab5.Controllers.HelloController">
    <children>
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="946.0">
          <children>
@@ -128,7 +128,7 @@
                               </TableView>
                               <Button fx:id="btnServiceAdd" layoutX="53.0" layoutY="426.0" mnemonicParsing="false" onAction="#btnServiceAddClick" prefHeight="50.0" prefWidth="98.0" text="Добавить услугу" textAlignment="CENTER" wrapText="true" />
                               <Button fx:id="btnServiceDelete" layoutX="301.0" layoutY="426.0" mnemonicParsing="false" onAction="#btnServiceDeleteClick" prefHeight="50.0" prefWidth="98.0" text="Удалить услугу" textAlignment="CENTER" wrapText="true" />
-                              <Button fx:id="btnServiceEdit" layoutX="173.0" layoutY="426.0" mnemonicParsing="false" onAction="#btnServiceEditlick" prefHeight="50.0" prefWidth="98.0" text="Редактировать услугу" textAlignment="CENTER" wrapText="true" />
+                              <Button fx:id="btnServiceEdit" layoutX="173.0" layoutY="426.0" mnemonicParsing="false" onAction="#btnServiceEditClick" prefHeight="50.0" prefWidth="98.0" text="Редактировать услугу" textAlignment="CENTER" wrapText="true" />
                            </children></AnchorPane>
                      </content>
                   </Tab>
