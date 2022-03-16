@@ -71,11 +71,17 @@ public class HelloController implements Initializable {
     public Button btnServiceEdit;
 
     //Работа с залами
+    //Таблица с залами
     public TableView<Hall> tvHall;
+    //Столбец с id залов
     public TableColumn<Hall, Integer> tcHall;
+    //Столбец с названиями залов
     public TableColumn<Hall, String> tcHallName;
+    //Кнопка добавить зал
     public Button btnHallAdd;
+    //Кнопка удалить зал
     public Button btnHallDelete;
+    //Кнопка редактировать зал
     public Button btnHallEdit;
 
     //Работа с сотрудниками
@@ -133,8 +139,11 @@ public class HelloController implements Initializable {
         tcServiceCost.setCellValueFactory(new PropertyValueFactory<>("cost"));
         tvService.setItems(DataBase.getService());
 
+        //Создаю фабрику для сборки данных по залу
+        //для id хола указываю параметр с класса Hall, который он берет(вызывает геттер)
         tcHall.setCellValueFactory(new PropertyValueFactory<>("hallId"));
         tcHallName.setCellValueFactory(new PropertyValueFactory<>("hallName"));
+        //закидываю в таблицу список зала(специальный список из JavaFX)
         tvHall.setItems(DataBase.getHall());
 
         tcStaffId.setCellValueFactory(new PropertyValueFactory<>("staffId"));

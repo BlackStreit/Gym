@@ -108,23 +108,34 @@ public class DataBase {
         }
     }
 
+    //Метод для добавления зала
     public static void addHall(String title){
+        //Команда для добавления
         String sql = "INSERT INTO Hall (title) VALUES ('"+title+"');";
         try {
+            //Стейтмент отправляет команду
             statement.executeUpdate(sql);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+    //Получить список залов
     public static ObservableList<Hall> getHall(){
+        //Специальный лист, который записывается в таблицу
         ObservableList<Hall> halls =FXCollections.observableArrayList();
+        //Запрос для выдачи
         String sql = "SELECT * FROM Hall;";
         try {
+            //ResultSet хранит данные их таблицы БД
             ResultSet resultSet = statement.executeQuery(sql);
+            //Пока есть что записывать
             while (resultSet.next()){
+                //Создать новый холл
                 var h = new Hall();
+                //Присовить холу Название = выдать текст из записи из колоники     //Столбец с id залов
                 h.setHallName(resultSet.getString("title"));
                 h.setHallId(resultSet.getInt("hallId"));
+                //Полжить зал в список
                 halls.add(h);
             }
 
@@ -135,6 +146,7 @@ public class DataBase {
         }
         return halls;
     }
+    //Найти зал по id
     public static Hall foundHall(int id){
         var hall = new Hall();
         String sql = "SELECT * FROM Hall where hallId  = "+id+";";
@@ -152,6 +164,7 @@ public class DataBase {
         }
         return hall;
     }
+    //изменить зал
     public static void editHall(Hall hall){
         String sql = "UPDATE Hall SET title = '"+hall.getHallName()+"' where hallId = " + hall.getHallId()+";";
         try {
@@ -160,6 +173,7 @@ public class DataBase {
             e.printStackTrace();
         }
     }
+    //Удалить зал по id
     public static void deleteHall(int id){
         try {
             statement.executeUpdate("delete from Hall where hallId = "+id+";");
@@ -167,6 +181,7 @@ public class DataBase {
             e.printStackTrace();
         }
     }
+    //Получить список все id залов
     public static ObservableList<Integer> getHallId(){
         ObservableList<Integer> ids = FXCollections.observableArrayList();
         var sql = "select hallId from Hall;";
