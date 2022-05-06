@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="824.0" prefWidth="485.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lab5.Controllers.StaffEditController">
+   <children>
+      <AnchorPane fx:id="topPane" layoutX="30.0" layoutY="37.0" prefHeight="200.0" prefWidth="413.0">
+         <children>
+            <ComboBox fx:id="cmbIds" layoutX="27.0" layoutY="16.0" onAction="#cmbIdsSwitch" prefWidth="150.0" />
+            <Button fx:id="btnFound" layoutX="50.0" layoutY="67.0" mnemonicParsing="false" onAction="#btnFoundClick" prefHeight="48.0" prefWidth="83.0" text="Найти" />
+            <TextArea fx:id="txtInfo" editable="false" layoutX="186.0" layoutY="10.0" prefHeight="180.0" prefWidth="200.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="bottomPane" layoutX="37.0" layoutY="247.0" prefHeight="438.0" prefWidth="403.0" visible="false">
+         <children>
+            <TextField fx:id="txtName" layoutX="134.0" layoutY="36.0" />
+            <TextField fx:id="txtSurname" layoutX="134.0" layoutY="98.0" />
+            <TextField fx:id="txtLastname" layoutX="134.0" layoutY="154.0" />
+            <TextField fx:id="txtPhone" layoutX="133.0" layoutY="327.0" />
+            <TextField fx:id="txtAddress" layoutX="136.0" layoutY="377.0" />
+            <Button fx:id="txtEdit" layoutX="159.0" layoutY="422.0" mnemonicParsing="false" onAction="#txtEditClick" prefHeight="48.0" prefWidth="86.0" text="Изменить" />
+            <Label layoutX="195.0" layoutY="11.0" text="Имя" />
+            <Label layoutX="184.0" layoutY="73.0" text="Отчество" />
+            <Label layoutX="183.0" layoutY="129.0" text="Фамилия" />
+            <Label layoutX="184.0" layoutY="187.0" />
+            <ComboBox fx:id="cmbExp" layoutX="132.0" layoutY="215.0" prefWidth="150.0" />
+            <Label layoutX="173.0" layoutY="187.0" text="Опыт работы" />
+            <TextField fx:id="txtSalary" layoutX="134.0" layoutY="271.0" />
+            <Label layoutX="182.0" layoutY="249.0" text="Зарплата" />
+            <Label layoutX="184.0" layoutY="304.0" text="Телефон" />
+            <Label layoutX="193.0" layoutY="360.0" text="Адрес" />
+         </children>
+      </AnchorPane>
+      <Button fx:id="txtClose" layoutX="200.0" layoutY="746.0" mnemonicParsing="false" onAction="#txtCloseClick" prefHeight="48.0" prefWidth="86.0" text="На главную" />
+      <Label fx:id="errorLog" layoutX="37.0" layoutY="6.0" />
+   </children>
+</AnchorPane>

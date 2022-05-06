@@ -28,7 +28,15 @@ public class Service {
         return title;
     }
 
-    public void setTitle(String title) {
+    @Override
+    public String toString() {
+        return "Название: "+title+"\nСтоимость: "+cost;
+    }
+
+    public void setTitle(String title) throws Exception {
+        if(title.length()==0){
+            throw  new Exception("Вы не ввели название");
+        }
         this.title = title;
     }
 

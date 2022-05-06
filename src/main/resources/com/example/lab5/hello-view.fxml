@@ -99,7 +99,6 @@
                               <TableView fx:id="tvStaff" layoutX="14.0" layoutY="22.0" prefHeight="392.0" prefWidth="851.0">
                                 <columns>
                                   <TableColumn fx:id="tcStaffId" prefWidth="94.0" text="ID сотрудника" />
-                                  <TableColumn fx:id="tcStaffServiceId" prefWidth="89.0" text="ID услуги" />
                                     <TableColumn fx:id="tcStaffName" prefWidth="78.0" text="Имя" />
                                     <TableColumn fx:id="tcStaffPatronymic" prefWidth="106.0" text="Отчество" />
                                     <TableColumn fx:id="tcStaffSurname" prefWidth="117.0" text="Фамилия" />

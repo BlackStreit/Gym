@@ -17,6 +17,39 @@ public class DataBase {
     public static Connection connection;
     public static Statement statement;
 
+    private static void deleteTable(){
+        try {
+            statement.executeUpdate("DROP TABLE Clients");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            statement.executeUpdate("DROP TABLE Hall");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            statement.executeUpdate("DROP TABLE Staff");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            statement.executeUpdate("DROP TABLE ClubCard");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            statement.executeUpdate("DROP TABLE TaskTable");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            statement.executeUpdate("DROP TABLE Service");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void createDataBase() {
         try {
             Class.forName("org.sqlite.JDBC"); //Проверяем наличие JDBC драйвера для работы с БД
@@ -32,6 +65,7 @@ public class DataBase {
         }
     }
     public static void createTable(){
+        //deleteTable();
         String sql = "CREATE TABLE IF NOT EXISTS Clients (\n" +
                 "clientID integer PRIMARY KEY AUTOINCREMENT,\n" +
                 "staffID integer,\n" +
@@ -53,7 +87,7 @@ public class DataBase {
                 "experience integer,\n" +
                 "name text,\n" +
                 "patronymic text,\n" +
-                "surname text\n" +
+                "surname text,\n" +
                 "salary integer\n" +
                 ");";
         try {
@@ -286,7 +320,8 @@ public class DataBase {
                 s.setPatronymic(resultSet.getString("patronymic"));
                 s.setSurname(resultSet.getString("surname"));
                 s.setStaffId(resultSet.getInt("staffID"));
-                s.setPhoneNumber(resultSet.getString("phone "));
+                s.setPhoneNumber(resultSet.getString("phone"));
+                s.setWorkExperience(resultSet.getInt("experience"));
                 staffs.add(s);
             }
         } catch (SQLException e) {
@@ -306,7 +341,7 @@ public class DataBase {
                 staff.setPatronymic(resultSet.getString("patronymic"));
                 staff.setSurname(resultSet.getString("surname"));
                 staff.setStaffId(resultSet.getInt("staffID"));
-                staff.setPhoneNumber(resultSet.getString("phone "));
+                staff.setPhoneNumber(resultSet.getString("phone"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -314,9 +349,9 @@ public class DataBase {
         return staff;
     }
     public static void editStaff(Staff staff){
-        String sql ="UPDATE Staff SET Clients staffID = "+staff.getStaffId()+", address= '"+staff.getAddress()+"', " +
+        String sql ="UPDATE Staff SET address= '"+staff.getAddress()+"', " +
                 "phone = '"+staff.getPhoneNumber()+"', name = '"+staff.getName()+"', patronymic = '"+staff.getPatronymic()+"', " +
-                "surname = '"+staff.getSurname()+"', salary = "+ staff.getSalary()+" where clientID = " + staff.getStaffId()+";";
+                "surname = '"+staff.getSurname()+"', salary = "+ staff.getSalary()+" where staffID = " + staff.getStaffId()+";";
         try {
             statement.executeUpdate(sql);
         } catch (SQLException e) {
@@ -329,6 +364,19 @@ public class DataBase {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public static ObservableList<Integer> getStaffIds(){
+        ObservableList<Integer> ids = FXCollections.observableArrayList();
+        var sql = "select staffId from Staff;";
+        try {
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()){
+                ids.add(resultSet.getInt("staffId"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ids;
     }
 
     public static void addClubCard(ClubCard clubCard){
@@ -482,6 +530,8 @@ public class DataBase {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return services;
     }
@@ -497,6 +547,8 @@ public class DataBase {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return s;
     }
@@ -510,9 +562,23 @@ public class DataBase {
     }
     public static void deleteService(int id){
         try {
+            statement.executeUpdate("delete from ClubCard where serviceId = " + id+";");
             statement.executeUpdate("delete from Service where serviceId = "+id+";");
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public static ObservableList<Integer> getServiceId(){
+        ObservableList<Integer> ids = FXCollections.observableArrayList();
+        var sql = "select serviceId from Service;";
+        try {
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()){
+                ids.add(resultSet.getInt("serviceId"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ids;
     }
 }

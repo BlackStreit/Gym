@@ -6,33 +6,32 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class HallDeleteController  implements Initializable {
-    public ComboBox<Integer> cmbId = new ComboBox();
+public class ServiceDeleteController implements Initializable {
+    public ComboBox <Integer> cmbId = new ComboBox();
     public Button btnDelete;
     public Button btnClose;
-    public Text errorLog;
-    public TextArea txtGetinfo;
+    public TextArea txtInfo;
+    public Label errolLog;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        init();
+    public void cmbIdSwitch(ActionEvent actionEvent) {
+        var info = DataBase.foundService(cmbId.getValue());
+        txtInfo.setText(info.toString());
     }
 
     public void btnDeleteClick(ActionEvent actionEvent) {
-        DataBase.deleteHall(cmbId.getValue());
-        errorLog.setText("Зал удален");
-        txtGetinfo.setText(DataBase.foundHall(cmbId.getValue()).toString());
+        DataBase.deleteService(cmbId.getValue());
+        errolLog.setText("Услуга удалена");
+        txtInfo.setText(DataBase.foundHall(cmbId.getValue()).toString());
         init();
     }
 
@@ -46,22 +45,21 @@ public class HallDeleteController  implements Initializable {
         totalStage.close();
         stage.show();
     }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        init();
+    }
     void init(){
-        var ids = DataBase.getHallId();
+        var ids = DataBase.getServiceId();
         cmbId.setItems(ids);
         if(ids.size()>=1) {
             cmbId.setValue(ids.get(0));
-            txtGetinfo.setText(DataBase.foundHall(cmbId.getValue()).toString());
+            txtInfo.setText(DataBase.foundService(cmbId.getValue()).toString());
         }
         else{
-            errorLog.setText("Все залы удалены");
+            txtInfo.setText("Все услуги удалены");
             cmbId.setDisable(true);
         }
-
-    }
-
-    public void cmbIdSwitch(ActionEvent actionEvent) {
-        var info = DataBase.foundHall(cmbId.getValue());
-        txtGetinfo.setText(info.toString());
     }
 }

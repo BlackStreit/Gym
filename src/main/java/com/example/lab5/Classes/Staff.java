@@ -1,7 +1,6 @@
 package com.example.lab5.Classes;
 
 public class Staff {
-    private int serviceId;
     private int staffId;
     private String address;
     private String phoneNumber;
@@ -11,8 +10,7 @@ public class Staff {
     private String patronymic;
     private String surname;
 
-    public Staff(int scheduleId, int staffId, String address, String phoneNumber, int workExperience, int salsry, String name, String patronymic, String surname) {
-        this.serviceId = scheduleId;
+    public Staff(int staffId, String address, String phoneNumber, int workExperience, int salsry, String name, String patronymic, String surname) {
         this.staffId = staffId;
         this.address = address;
         this.phoneNumber = phoneNumber;
@@ -24,7 +22,6 @@ public class Staff {
     }
 
     public Staff() {
-        this.serviceId = 0;
         this.staffId = 0;
         this.address = "address";
         this.phoneNumber = "phoneNumber";
@@ -33,13 +30,6 @@ public class Staff {
         this.name = "name";
         this.patronymic = "patronymic";
         this.surname = "surname";
-    }
-    public int getServiceId() {
-        return serviceId;
-    }
-
-    public void setServiceId(int serviceId) {
-        this.serviceId = serviceId;
     }
 
     public int getStaffId() {
@@ -104,5 +94,12 @@ public class Staff {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    @Override
+    public String toString() {
+        return "Номер: "+staffId+"\nИмя: " + name+"\n" +
+                "Отчество: " + patronymic + "\nФамилия: "+surname+"\n" +
+                "Номер телефона: " + phoneNumber + "\nАдрес: " + address;
     }
 }

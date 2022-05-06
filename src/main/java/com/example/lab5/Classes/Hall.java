@@ -36,5 +36,8 @@ public class Hall {
         this.hallName = hallName;
     }
 
-
+    @Override
+    public String toString() {
+        return "Название: "+ hallName;
+    }
 }
