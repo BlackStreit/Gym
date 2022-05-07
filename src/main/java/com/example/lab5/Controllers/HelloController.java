@@ -100,7 +100,15 @@ public class HelloController implements Initializable {
     public Button btnStaffDelete;
 
 
-    public void btnClientAddClick(ActionEvent actionEvent) {
+    public void btnClientAddClick(ActionEvent actionEvent) throws IOException {
+        Stage totalStage = (Stage) btnHallAdd.getScene().getWindow();
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("clientAdd.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("Добавить клиента");
+        stage.setScene(scene);
+        totalStage.close();
+        stage.show();
     }
 
     @Override
@@ -110,7 +118,6 @@ public class HelloController implements Initializable {
 
     void loadTable(){
         tcClientId.setCellValueFactory(new PropertyValueFactory<>("clientId"));
-        tcStaffClientId.setCellValueFactory(new PropertyValueFactory<>("staffId"));
         tcName.setCellValueFactory(new PropertyValueFactory<>("name"));
         tcPatronymic.setCellValueFactory(new PropertyValueFactory<>("patronymic"));
         tcSurname.setCellValueFactory(new PropertyValueFactory<>("surname"));
@@ -157,13 +164,30 @@ public class HelloController implements Initializable {
         tvStaff.setItems(DataBase.getStaff());
     }
 
-    public void btnClientEditClick(ActionEvent actionEvent) {
+    public void btnClientEditClick(ActionEvent actionEvent) throws IOException {
+        Stage totalStage = (Stage) btnHallAdd.getScene().getWindow();
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("clientEdit.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("Удалить клиента");
+        stage.setScene(scene);
+        totalStage.close();
+        stage.show();
     }
 
-    public void btnClientDeleteClick(ActionEvent actionEvent) {
+    public void btnClientDeleteClick(ActionEvent actionEvent) throws IOException {
+        Stage totalStage = (Stage) btnHallAdd.getScene().getWindow();
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("clientDelete.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("Удалить клиента");
+        stage.setScene(scene);
+        totalStage.close();
+        stage.show();
     }
 
-    public void btnCardAddClick(ActionEvent actionEvent) {
+    public void btnCardAddClick(ActionEvent actionEvent) throws IOException {
+
     }
 
     public void btnCardEditClick(ActionEvent actionEvent) {
@@ -251,7 +275,7 @@ public class HelloController implements Initializable {
     public void btnStaffAddClick(ActionEvent actionEvent) throws IOException {
         Stage totalStage = (Stage) btnHallAdd.getScene().getWindow();
         Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("stuffAdd.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("stаffAdd.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Добавить сотрудника");
         stage.setScene(scene);

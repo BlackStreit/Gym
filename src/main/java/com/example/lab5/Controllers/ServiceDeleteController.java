@@ -31,7 +31,7 @@ public class ServiceDeleteController implements Initializable {
     public void btnDeleteClick(ActionEvent actionEvent) {
         DataBase.deleteService(cmbId.getValue());
         errolLog.setText("Услуга удалена");
-        txtInfo.setText(DataBase.foundHall(cmbId.getValue()).toString());
+        txtInfo.setText(DataBase.foundService(cmbId.getValue()).toString());
         init();
     }
 

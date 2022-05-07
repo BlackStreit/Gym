@@ -68,7 +68,6 @@ public class DataBase {
         //deleteTable();
         String sql = "CREATE TABLE IF NOT EXISTS Clients (\n" +
                 "clientID integer PRIMARY KEY AUTOINCREMENT,\n" +
-                "staffID integer,\n" +
                 "address text,\n" +
                 "phone text,\n" +
                 "name text,\n" +
@@ -210,6 +209,11 @@ public class DataBase {
     //Удалить зал по id
     public static void deleteHall(int id){
         try {
+            statement.executeUpdate("delete from TaskTable where hallId = "+id+";");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
             statement.executeUpdate("delete from Hall where hallId = "+id+";");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -231,7 +235,7 @@ public class DataBase {
     }
 
     public static void addClients(Client client){
-        String sql ="INSERT INTO Clients (staffID, address, phone, name, patronymic, surname) VALUES ("+client.getStaffId()+", '"+client.getAddress()+"', " +
+        String sql ="INSERT INTO Clients ( address, phone, name, patronymic, surname) VALUES ('"+client.getAddress()+"', " +
                 "'"+client.getPhoneNumber()+"', '"+client.getName()+"', '"+client.getPatronymic()+"', '"+client.getSurname()+"');";
         try {
             statement.executeUpdate(sql);
@@ -251,8 +255,7 @@ public class DataBase {
                 c.setName(resultSet.getString("name"));
                 c.setPatronymic(resultSet.getString("patronymic"));
                 c.setSurname(resultSet.getString("surname"));
-                c.setStaffId(resultSet.getInt("staffID"));
-                c.setPhoneNumber(resultSet.getString("phone "));
+                c.setPhoneNumber(resultSet.getString("phone"));
                 clients.add(c);
             }
         } catch (SQLException e) {
@@ -271,8 +274,7 @@ public class DataBase {
                 client.setName(resultSet.getString("name"));
                 client.setPatronymic(resultSet.getString("patronymic"));
                 client.setSurname(resultSet.getString("surname"));
-                client.setStaffId(resultSet.getInt("staffID"));
-                client.setPhoneNumber(resultSet.getString("phone "));
+                client.setPhoneNumber(resultSet.getString("phone"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -280,7 +282,7 @@ public class DataBase {
         return client;
     }
     public static void editClient(Client client){
-        String sql ="UPDATE Clients SET Clients staffID = "+client.getStaffId()+", address= '"+client.getAddress()+"', " +
+        String sql ="UPDATE Clients SET address= '"+client.getAddress()+"', " +
                 "phone = '"+client.getPhoneNumber()+"', name = '"+client.getName()+"', patronymic = '"+client.getPatronymic()+"', " +
                 "surname = '"+client.getSurname()+"' where clientID = " + client.getClientId()+";";
         try {
@@ -295,6 +297,19 @@ public class DataBase {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public static ObservableList<Integer> getClientIds(){
+        ObservableList<Integer> ids = FXCollections.observableArrayList();
+        var sql = "select clientID from Clients;";
+        try {
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()){
+                ids.add(resultSet.getInt("clientID"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ids;
     }
 
     public static void addStaff(Staff staff){
@@ -359,6 +374,11 @@ public class DataBase {
         }
     }
     public static void deleteStaff(int id){
+        try {
+            statement.executeUpdate("delete from TaskTable where staffId = "+id+";");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         try {
             statement.executeUpdate("delete from Staff where staffId = "+id+";");
         } catch (SQLException e) {

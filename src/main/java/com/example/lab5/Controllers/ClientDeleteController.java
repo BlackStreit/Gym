@@ -16,35 +16,27 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class StaffDeleteController implements Initializable {
+public class ClientDeleteController implements Initializable {
     public ComboBox<Integer> cmbIds = new ComboBox<>();
     public Button btnDelete;
     public Button btnClose;
     public TextArea txtInfo;
     public Label errorLog;
 
-    void init(){
-        var ids = DataBase.getStaffIds();
-        cmbIds.setItems(ids);
-        if(ids.size()>=1) {
-            cmbIds.setValue(ids.get(0));
-            txtInfo.setText(DataBase.foundStaff(cmbIds.getValue()).toString());
-        }
-        else{
-            txtInfo.setText("Все сотрудники удалены");
-            cmbIds.setDisable(true);
-        }
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         init();
     }
 
+    public void cmbIdsSwitch(ActionEvent actionEvent) {
+        var info = DataBase.foundClient(cmbIds.getValue());
+        txtInfo.setText(info.toString());
+    }
+
     public void btnDeleteClick(ActionEvent actionEvent) {
-        DataBase.deleteStaff(cmbIds.getValue());
-        errorLog.setText("Сотрудник удален");
-        txtInfo.setText(DataBase.foundStaff(cmbIds.getValue()).toString());
+        DataBase.deleteClient(cmbIds.getValue());
+        errorLog.setText("Клиент удален");
+        txtInfo.setText(DataBase.foundClient(cmbIds.getValue()).toString());
         init();
     }
 
@@ -59,8 +51,16 @@ public class StaffDeleteController implements Initializable {
         stage.show();
     }
 
-    public void cmbIdsSwitch(ActionEvent actionEvent) {
-        var info = DataBase.foundStaff(cmbIds.getValue());
-        txtInfo.setText(info.toString());
+    void init(){
+        var ids = DataBase.getClientIds();
+        cmbIds.setItems(ids);
+        if(ids.size()>=1) {
+            cmbIds.setValue(ids.get(0));
+            txtInfo.setText(DataBase.foundClient(cmbIds.getValue()).toString());
+        }
+        else{
+            txtInfo.setText("Все клиенты удалены");
+            cmbIds.setDisable(true);
+        }
     }
 }

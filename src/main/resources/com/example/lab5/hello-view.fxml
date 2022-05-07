@@ -21,7 +21,6 @@
                               <TableView fx:id="tvlClient" layoutX="10.0" layoutY="23.0" prefHeight="385.0" prefWidth="853.0">
                                 <columns>
                                   <TableColumn fx:id="tcClientId" prefWidth="101.0" text="Номер клиента" />
-                                  <TableColumn fx:id="tcStaffClientId" prefWidth="124.0" text="Номер сотрудника" />
                                     <TableColumn fx:id="tcName" prefWidth="126.0" text="Имя" />
                                     <TableColumn fx:id="tcPatronymic" prefWidth="175.0" text="Отчество" />
                                     <TableColumn fx:id="tcSurname" prefWidth="103.0" text="Фамилия" />
@@ -56,7 +55,7 @@
                            </children></AnchorPane>
                   </content>
                 </Tab>
-                  <Tab text="Рассписание">
+                  <Tab text="Расписание">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>

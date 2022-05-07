@@ -2,7 +2,6 @@ package com.example.lab5.Classes;
 
 public class Client {
     private int clientId;
-    private int staffId;
     private String name;
     private String patronymic;
     private String surname;
@@ -11,7 +10,6 @@ public class Client {
 
     public Client(int clientId, int staffId, String name, String patronymic, String surname, String address, String phoneNumber) {
         this.clientId = clientId;
-        this.staffId = staffId;
         this.name = name;
         this.patronymic = patronymic;
         this.surname = surname;
@@ -21,7 +19,6 @@ public class Client {
 
     public Client() {
         this.clientId = 0;
-        this.staffId = 0;
         this.name = "name";
         this.patronymic = "patronymic";
         this.surname = "surname";
@@ -35,14 +32,6 @@ public class Client {
 
     public void setClientId(int clientId) {
         this.clientId = clientId;
-    }
-
-    public int getStaffId() {
-        return staffId;
-    }
-
-    public void setStaffId(int staffId) {
-        this.staffId = staffId;
     }
 
     public String getName() {
@@ -83,5 +72,11 @@ public class Client {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "Имя: " + name + "\nОтчество: " + patronymic+"\n" +
+                "Фамилия: " + surname + "\n Адрес: " + address + "\n Телефон: " + phoneNumber;
     }
 }
