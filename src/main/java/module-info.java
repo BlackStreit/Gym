@@ -20,4 +20,6 @@ module com.example.lab5 {
     opens com.example.lab5.Controllers.Service to javafx.fxml;
     exports com.example.lab5.Controllers.ClubCard;
     opens com.example.lab5.Controllers.ClubCard to javafx.fxml;
+    exports com.example.lab5.Controllers.TaskTable;
+    opens com.example.lab5.Controllers.TaskTable to javafx.fxml;
 }

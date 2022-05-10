@@ -33,6 +33,7 @@ public class ClientAddController implements Initializable {
     }
 
     public void btnAddClick(ActionEvent actionEvent) {
+        var p = txtPhone.getText().length();
         var client = new Client();
         if(txtName.getText().length()==0){
             errorLog.setText("Вы не ввели имя");
@@ -56,7 +57,7 @@ public class ClientAddController implements Initializable {
         client.setAddress(txtAddress.getText());
 
         try{
-            if(txtPhone.getText().length() != 11 && txtPhone.getText().length() != 6){
+            if(txtPhone.getText().length() != 6 && txtPhone.getText().length() != 11){
                 throw new Exception();
             }
             int phone = Integer.parseInt(txtPhone.getText());

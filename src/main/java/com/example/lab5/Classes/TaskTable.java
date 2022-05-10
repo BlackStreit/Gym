@@ -1,5 +1,7 @@
 package com.example.lab5.Classes;
 
+import com.example.lab5.DataBase.DataBase;
+
 import java.time.LocalDate;
 import java.sql.Date;
 
@@ -80,5 +82,14 @@ public class TaskTable {
 
     public void setDuration(int duration) {
         this.duration = duration;
+    }
+
+    @Override
+    public String toString() {
+        return "Клиент: " + DataBase.foundClient(codeClient) + "\n\n" +
+                "Сотрудник: " + DataBase.foundStaff(codeStaff) + "\n\n" +
+                "Зал: " + DataBase.foundHall(codeHall) + "\n\n" +
+                "Дата:" + date.toString() + "\n" +
+                "Продолжительность: " + duration;
     }
 }

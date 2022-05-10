@@ -117,7 +117,7 @@ public class DataBase {
                 "staffId integer,\n" +
                 "hallId integer,\n" +
                 "clientId integer,\n" +
-                "dateLesson datetime,\n" +
+                "dateLesson text,\n" +
                 "duration integer\n" +
                 ");";
         try {
@@ -492,7 +492,7 @@ public class DataBase {
                 tt.setCodeClient(resultSet.getInt("clientId"));
                 tt.setCodeHall(resultSet.getInt("hallId"));
                 tt.setCodeStaff(resultSet.getInt("staffId"));
-                tt.setDate(resultSet.getDate("dateLesson"));
+                tt.setDate(Date.valueOf(resultSet.getString("dateLesson")));
                 tt.setNumber(resultSet.getInt("taskTableId"));
                 tt.setDuration(resultSet.getInt("duration"));
                 taskTables.add(tt);
@@ -511,7 +511,7 @@ public class DataBase {
                 tt.setCodeClient(resultSet.getInt("clientId"));
                 tt.setCodeHall(resultSet.getInt("hallId"));
                 tt.setCodeStaff(resultSet.getInt("staffId"));
-                tt.setDate(resultSet.getDate("dateLesson"));
+                tt.setDate(Date.valueOf(resultSet.getString("dateLesson")));
                 tt.setNumber(resultSet.getInt("taskTableId"));
                 tt.setDuration(resultSet.getInt("duration"));
             }
@@ -535,6 +535,19 @@ public class DataBase {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public static ObservableList<Integer> getTaskTableId(){
+        ObservableList<Integer> ids = FXCollections.observableArrayList();
+        var sql = "select taskTableId from TaskTable;";
+        try {
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()){
+                ids.add(resultSet.getInt("taskTableId"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ids;
     }
 
     public static void addService(Service service){

@@ -220,13 +220,38 @@ public class HelloController implements Initializable {
     }
 
     public void btnTaskAddClick(ActionEvent actionEvent) throws IOException {
+        Stage totalStage = (Stage) btnHallAdd.getScene().getWindow();
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("TaskTableAdd.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("Добавить занятие");
+        stage.setScene(scene);
+        totalStage.close();
+        stage.show();
 
     }
 
-    public void btnTaskEditClick(ActionEvent actionEvent) {
+    public void btnTaskEditClick(ActionEvent actionEvent) throws IOException {
+        Stage totalStage = (Stage) btnHallAdd.getScene().getWindow();
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("TaskTableEdit.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("Изменить занятие");
+        stage.setScene(scene);
+        totalStage.close();
+        stage.show();
     }
 
-    public void btnTaskDeleteClick(ActionEvent actionEvent) {
+    public void btnTaskDeleteClick(ActionEvent actionEvent) throws IOException {
+        Stage totalStage = (Stage) btnHallAdd.getScene().getWindow();
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("TaskTableDelete.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("Удалить занятие");
+        stage.setScene(scene);
+        totalStage.close();
+        stage.show();
+
     }
 
     public void btnServiceAddClick(ActionEvent actionEvent) throws IOException {
