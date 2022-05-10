@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="284.0" prefWidth="587.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lab5.Controllers.HallDeleteController">
+<AnchorPane prefHeight="284.0" prefWidth="587.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lab5.Controllers.Hall.HallDeleteController">
    <children>
       <ComboBox fx:id="cmbId" layoutX="89.0" layoutY="41.0" onAction="#cmbIdSwitch" prefHeight="27.0" prefWidth="202.0" />
       <Button fx:id="btnDelete" layoutX="139.0" layoutY="107.0" mnemonicParsing="false" onAction="#btnDeleteClick" prefHeight="53.0" prefWidth="98.0" text="Удалить" textAlignment="CENTER" wrapText="true" />

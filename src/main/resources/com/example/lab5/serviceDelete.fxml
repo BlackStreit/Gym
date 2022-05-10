@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane prefHeight="293.0" prefWidth="412.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lab5.Controllers.ServiceDeleteController">
+<AnchorPane prefHeight="293.0" prefWidth="412.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lab5.Controllers.Service.ServiceDeleteController">
    <children>
       <ComboBox fx:id="cmbId" layoutX="45.0" layoutY="64.0" onAction="#cmbIdSwitch" prefWidth="150.0" />
       <Label layoutX="82.0" layoutY="34.0" text="Номер услуги" />

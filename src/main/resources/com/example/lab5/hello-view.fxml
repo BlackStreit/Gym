@@ -35,7 +35,7 @@
                         </AnchorPane>
                   </content>
                 </Tab>
-                <Tab text="Абонименты">
+                <Tab text="Абонементы">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -49,9 +49,9 @@
                                     <TableColumn fx:id="tcEndCard" prefWidth="98.0" text="Конец" />
                                 </columns>
                               </TableView>
-                              <Button fx:id="btnCardAdd" layoutX="30.0" layoutY="443.0" mnemonicParsing="false" onAction="#btnCardAddClick" prefHeight="43.0" prefWidth="100.0" text="Добавить абонимент" textAlignment="CENTER" wrapText="true" />
-                              <Button fx:id="btnCardEdit" layoutX="157.0" layoutY="443.0" mnemonicParsing="false" onAction="#btnCardEditClick" prefHeight="43.0" prefWidth="100.0" text="Изменить абонимент" textAlignment="CENTER" wrapText="true" />
-                              <Button fx:id="btnCardDelete" layoutX="281.0" layoutY="443.0" mnemonicParsing="false" onAction="#btnCardDeleteClick" prefHeight="43.0" prefWidth="100.0" text="Удалить абонимент" textAlignment="CENTER" wrapText="true" />
+                              <Button fx:id="btnCardAdd" layoutX="30.0" layoutY="443.0" mnemonicParsing="false" onAction="#btnCardAddClick" prefHeight="43.0" prefWidth="100.0" text="Добавить абонемент" textAlignment="CENTER" wrapText="true" />
+                              <Button fx:id="btnCardEdit" layoutX="157.0" layoutY="443.0" mnemonicParsing="false" onAction="#btnCardEditClick" prefHeight="43.0" prefWidth="100.0" text="Изменить абонемент" textAlignment="CENTER" wrapText="true" />
+                              <Button fx:id="btnCardDelete" layoutX="281.0" layoutY="443.0" mnemonicParsing="false" onAction="#btnCardDeleteClick" prefHeight="43.0" prefWidth="100.0" text="Удалить абонемент" textAlignment="CENTER" wrapText="true" />
                            </children></AnchorPane>
                   </content>
                 </Tab>
@@ -70,8 +70,8 @@
                                 </columns>
                               </TableView>
                               <Button fx:id="btnTaskAdd" layoutX="31.0" layoutY="436.0" mnemonicParsing="false" onAction="#btnTaskAddClick" prefHeight="50.0" prefWidth="102.0" text="Добавить занятие" textAlignment="CENTER" wrapText="true" />
-                              <Button fx:id="btnTaskEdit" layoutX="155.0" layoutY="436.0" mnemonicParsing="false" onAction="#btnTaskEditClick" prefHeight="50.0" prefWidth="102.0" text="Добавить занятие" textAlignment="CENTER" wrapText="true" />
-                              <Button fx:id="btnTaskDelete" layoutX="280.0" layoutY="436.0" mnemonicParsing="false" onAction="#btnTaskDeleteClick" prefHeight="50.0" prefWidth="102.0" text="Добавить занятие" textAlignment="CENTER" wrapText="true" />
+                              <Button fx:id="btnTaskEdit" layoutX="155.0" layoutY="436.0" mnemonicParsing="false" onAction="#btnTaskEditClick" prefHeight="50.0" prefWidth="102.0" text="Изменить занятие" textAlignment="CENTER" wrapText="true" />
+                              <Button fx:id="btnTaskDelete" layoutX="280.0" layoutY="436.0" mnemonicParsing="false" onAction="#btnTaskDeleteClick" prefHeight="50.0" prefWidth="102.0" text="Удалить занятие" textAlignment="CENTER" wrapText="true" />
                            </children></AnchorPane>
                      </content>
                   </Tab>

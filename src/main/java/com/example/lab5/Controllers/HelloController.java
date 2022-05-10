@@ -187,16 +187,40 @@ public class HelloController implements Initializable {
     }
 
     public void btnCardAddClick(ActionEvent actionEvent) throws IOException {
-
+        Stage totalStage = (Stage) btnHallAdd.getScene().getWindow();
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("ClubCardAdd.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("Добавить абонемент");
+        stage.setScene(scene);
+        totalStage.close();
+        stage.show();
     }
 
-    public void btnCardEditClick(ActionEvent actionEvent) {
+    public void btnCardEditClick(ActionEvent actionEvent) throws IOException {
+        Stage totalStage = (Stage) btnHallAdd.getScene().getWindow();
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("ClubCardEdit.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("Удалить абонемент");
+        stage.setScene(scene);
+        totalStage.close();
+        stage.show();
     }
 
-    public void btnCardDeleteClick(ActionEvent actionEvent) {
+    public void btnCardDeleteClick(ActionEvent actionEvent) throws IOException {
+        Stage totalStage = (Stage) btnHallAdd.getScene().getWindow();
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("ClubCardDelete.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("Удалить абонемент");
+        stage.setScene(scene);
+        totalStage.close();
+        stage.show();
     }
 
-    public void btnTaskAddClick(ActionEvent actionEvent) {
+    public void btnTaskAddClick(ActionEvent actionEvent) throws IOException {
+
     }
 
     public void btnTaskEditClick(ActionEvent actionEvent) {
@@ -275,7 +299,7 @@ public class HelloController implements Initializable {
     public void btnStaffAddClick(ActionEvent actionEvent) throws IOException {
         Stage totalStage = (Stage) btnHallAdd.getScene().getWindow();
         Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("stаffAdd.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("stuffAdd.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Добавить сотрудника");
         stage.setScene(scene);

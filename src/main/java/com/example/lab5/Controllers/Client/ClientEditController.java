@@ -1,11 +1,8 @@
-package com.example.lab5.Controllers;
+package com.example.lab5.Controllers.Client;
 
 import com.example.lab5.Classes.Client;
-import com.example.lab5.Classes.Staff;
 import com.example.lab5.DataBase.DataBase;
 import com.example.lab5.HelloApplication;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;

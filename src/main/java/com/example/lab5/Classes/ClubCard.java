@@ -78,4 +78,13 @@ public class ClubCard {
     public void setClientId(int clientId) {
         this.clientId = clientId;
     }
+
+    @Override
+    public String toString() {
+        return "Информация о клиенте:\n " + DataBase.foundClient(clientId).toString() + "\n\n" +
+                "Информация об услуге:\n" + DataBase.foundService(serviceId)+"\n\n" +
+                "Дата начала абонемента: " + startCard.toString() + "\n" +
+                "Дата конца абонемента: " + endCard.toString() +"\n" +
+                "Стоимость: " + price;
+    }
 }

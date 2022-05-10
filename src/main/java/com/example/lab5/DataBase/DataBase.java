@@ -1,10 +1,6 @@
 package com.example.lab5.DataBase;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -107,8 +103,8 @@ public class DataBase {
                 "CardId integer PRIMARY KEY AUTOINCREMENT,\n" +
                 "clientId integer,\n" +
                 "serviceId integer,\n" +
-                "startCard datetime,\n" +
-                "endCard datetime,\n" +
+                "startCard text,\n" +
+                "endCard text,\n" +
                 "price integer\n" +
                 ");";
         try {
@@ -401,7 +397,7 @@ public class DataBase {
 
     public static void addClubCard(ClubCard clubCard){
         var sql = "INSERT INTO ClubCard (clientId, serviceId, startCard, endCard, price ) VALUES ("+clubCard.getClientId()+", " +
-                " "+clubCard.getServiceId()+", '"+clubCard.getStartCard()+"', '"+ clubCard.getEndCard()+"', "+clubCard.getPrice()+");";
+                " "+clubCard.getServiceId()+", '"+clubCard.getStartCard().toString()+"', '"+ clubCard.getEndCard().toString()+"', "+clubCard.getPrice()+");";
         try {
             statement.executeUpdate(sql);
         } catch (SQLException e) {
@@ -417,8 +413,8 @@ public class DataBase {
                 var cc = new ClubCard();
                 cc.setCardId(resultSet.getInt("CardId"));
                 cc.setClientId(resultSet.getInt("clientId"));
-                cc.setStartCard(resultSet.getDate("startCard"));
-                cc.setEndCard(resultSet.getDate("endCard"));
+                cc.setStartCard(Date.valueOf(resultSet.getString("startCard")));
+                cc.setEndCard(Date.valueOf(resultSet.getString("endCard")));
                 cc.setPrice(resultSet.getInt("price"));
                 cc.setServiceId(resultSet.getInt("serviceId"));
                 clubCards.add(cc);
@@ -436,8 +432,8 @@ public class DataBase {
             while (resultSet.next()){
                 cc.setCardId(resultSet.getInt("CardId"));
                 cc.setClientId(resultSet.getInt("clientId"));
-                cc.setStartCard(resultSet.getDate("startCard"));
-                cc.setEndCard(resultSet.getDate("endCard"));
+                cc.setStartCard(Date.valueOf(resultSet.getString("startCard")));
+                cc.setEndCard(Date.valueOf(resultSet.getString("endCard")));
                 cc.setPrice(resultSet.getInt("price"));
                 cc.setServiceId(resultSet.getInt("serviceId"));
             }
@@ -447,8 +443,8 @@ public class DataBase {
         return cc;
     }
     public static void editClubCard(ClubCard clubCard){
-        var sql = "UPDATE Staff SET ClubCard clientId = "+clubCard.getCardId()+", serviceId = "+clubCard.getServiceId()+", " +
-                "startCard = '"+clubCard.getStartCard()+"', endCard = '"+clubCard.getEndCard()+"', price = "+clubCard.getPrice()+" " +
+        var sql = "UPDATE ClubCard SET  clientId = "+clubCard.getCardId()+", serviceId = "+clubCard.getServiceId()+", " +
+                "startCard = '"+clubCard.getStartCard().toString()+"', endCard = '"+clubCard.getEndCard().toString()+"', price = "+clubCard.getPrice()+" " +
                 "where CardId = "+clubCard.getCardId()+";";
         try {
             statement.executeUpdate(sql);
@@ -462,6 +458,19 @@ public class DataBase {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public static ObservableList<Integer> getClubCardId(){
+        ObservableList<Integer> ids = FXCollections.observableArrayList();
+        var sql = "select CardId from ClubCard;";
+        try {
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()){
+                ids.add(resultSet.getInt("CardId"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ids;
     }
 
     public static void addTaskTable(TaskTable tt){

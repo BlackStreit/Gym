@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane prefHeight="442.0" prefWidth="377.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lab5.Controllers.HallEditController">
+<AnchorPane prefHeight="442.0" prefWidth="377.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lab5.Controllers.Hall.HallEditController">
    <children>
       <ComboBox fx:id="cmbId" layoutX="114.0" layoutY="52.0" prefWidth="150.0" />
       <Text fx:id="errorLog" layoutX="238.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="124.13671875" />

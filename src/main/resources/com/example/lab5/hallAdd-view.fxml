@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="295.0" prefWidth="526.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lab5.Controllers.HallAddController">
+<AnchorPane prefHeight="295.0" prefWidth="526.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lab5.Controllers.Hall.HallAddController">
    <children>
       <Text layoutX="207.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Название зала" />
       <TextField fx:id="tfHallTitle" layoutX="159.0" layoutY="93.0" prefHeight="24.0" prefWidth="190.0" />

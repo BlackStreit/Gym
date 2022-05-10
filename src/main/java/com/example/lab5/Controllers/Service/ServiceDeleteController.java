@@ -1,4 +1,4 @@
-package com.example.lab5.Controllers;
+package com.example.lab5.Controllers.Service;
 
 import com.example.lab5.DataBase.DataBase;
 import com.example.lab5.HelloApplication;
@@ -16,31 +16,26 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ClientDeleteController implements Initializable {
-    public ComboBox<Integer> cmbIds = new ComboBox<>();
+public class ServiceDeleteController implements Initializable {
+    public ComboBox <Integer> cmbId = new ComboBox();
     public Button btnDelete;
     public Button btnClose;
     public TextArea txtInfo;
-    public Label errorLog;
+    public Label errolLog;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        init();
-    }
-
-    public void cmbIdsSwitch(ActionEvent actionEvent) {
-        var info = DataBase.foundClient(cmbIds.getValue());
+    public void cmbIdSwitch(ActionEvent actionEvent) {
+        var info = DataBase.foundService(cmbId.getValue());
         txtInfo.setText(info.toString());
     }
 
     public void btnDeleteClick(ActionEvent actionEvent) {
-        DataBase.deleteClient(cmbIds.getValue());
-        errorLog.setText("Клиент удален");
-        txtInfo.setText(DataBase.foundClient(cmbIds.getValue()).toString());
+        DataBase.deleteService(cmbId.getValue());
+        errolLog.setText("Услуга удалена");
+        txtInfo.setText(DataBase.foundService(cmbId.getValue()).toString());
         init();
     }
 
-    public void btnCloseClose(ActionEvent actionEvent) throws IOException {
+    public void btnCloseClick(ActionEvent actionEvent) throws IOException {
         Stage totalStage = (Stage) btnClose.getScene().getWindow();
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
@@ -51,16 +46,20 @@ public class ClientDeleteController implements Initializable {
         stage.show();
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        init();
+    }
     void init(){
-        var ids = DataBase.getClientIds();
-        cmbIds.setItems(ids);
+        var ids = DataBase.getServiceId();
+        cmbId.setItems(ids);
         if(ids.size()>=1) {
-            cmbIds.setValue(ids.get(0));
-            txtInfo.setText(DataBase.foundClient(cmbIds.getValue()).toString());
+            cmbId.setValue(ids.get(0));
+            txtInfo.setText(DataBase.foundService(cmbId.getValue()).toString());
         }
         else{
-            txtInfo.setText("Все клиенты удалены");
-            cmbIds.setDisable(true);
+            txtInfo.setText("Все услуги удалены");
+            cmbId.setDisable(true);
         }
     }
 }

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane prefHeight="561.0" prefWidth="446.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lab5.Controllers.ServiceEditController">
+<AnchorPane prefHeight="561.0" prefWidth="446.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lab5.Controllers.Service.ServiceEditController">
    <children>
       <AnchorPane fx:id="topPane" layoutX="31.0" layoutY="56.0" prefHeight="200.0" prefWidth="385.0">
          <children>

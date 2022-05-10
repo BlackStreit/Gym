@@ -1,4 +1,4 @@
-package com.example.lab5.Controllers;
+package com.example.lab5.Controllers.Staff;
 
 import com.example.lab5.Classes.Staff;
 import com.example.lab5.DataBase.DataBase;
