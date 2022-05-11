@@ -12,10 +12,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -98,6 +97,10 @@ public class HelloController implements Initializable {
     public Button btnStaffAdd;
     public Button btnStaffEdit;
     public Button btnStaffDelete;
+    public TextField txtClientNameQuery;
+    public TextField txtClubCardService;
+    public DatePicker dbTaskTable;
+    public TextField txtStaffLastName;
 
 
     public void btnClientAddClick(ActionEvent actionEvent) throws IOException {
@@ -352,5 +355,25 @@ public class HelloController implements Initializable {
         stage.setScene(scene);
         totalStage.close();
         stage.show();
+    }
+
+    public void txtClientNameQueryPress(KeyEvent actionEvent) {
+        var c = DataBase.findClientQuery(txtClientNameQuery.getText());
+        tvlClient.setItems(c);
+    }
+
+    public void txtClubCardServicePress(KeyEvent keyEvent) {
+        var cc = DataBase.findClubCardQuery(txtClubCardService.getText());
+        tvClubCard.setItems(cc);
+    }
+
+    public void dbTaskTableClick(ActionEvent actionEvent) {
+        var tt = DataBase.findTaskTableQuery(dbTaskTable.getValue().toString(), txtStaffLastName.getText());
+        tvTaskTable.setItems(tt);
+    }
+
+    public void txtStaffLastNamePress(KeyEvent keyEvent) {
+        var tt = DataBase.findTaskTableQuery(dbTaskTable.getValue().toString(), txtStaffLastName.getText());
+        tvTaskTable.setItems(tt);
     }
 }

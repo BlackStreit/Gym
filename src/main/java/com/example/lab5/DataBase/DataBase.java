@@ -623,4 +623,71 @@ public class DataBase {
         }
         return ids;
     }
+
+
+    public static ObservableList<Client> findClientQuery(String lastname){
+        ObservableList<Client> clients = FXCollections.observableArrayList();
+        var req = "select * from Clients where surname Like '%"+lastname+"%'";
+        try {
+            ResultSet resultSet = statement.executeQuery(req);
+            while (resultSet.next()){
+                var client = new Client();
+                client.setAddress(resultSet.getString("address"));
+                client.setClientId(resultSet.getInt("clientID"));
+                client.setName(resultSet.getString("name"));
+                client.setPatronymic(resultSet.getString("patronymic"));
+                client.setSurname(resultSet.getString("surname"));
+                client.setPhoneNumber(resultSet.getString("phone"));
+                clients.add(client);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return clients;
+    }
+    public static ObservableList<ClubCard> findClubCardQuery(String service){
+        ObservableList<ClubCard> clubCards = FXCollections.observableArrayList();
+        var req = "SELECT * FROM ClubCard WHERE serviceId IN " +
+                "(SELECT serviceId FROM Service " +
+                "WHERE title LIKE '%"+service+"%')";
+        try {
+            ResultSet resultSet = statement.executeQuery(req);
+            while (resultSet.next()){
+                var cc = new ClubCard();
+                cc.setCardId(resultSet.getInt("CardId"));
+                cc.setClientId(resultSet.getInt("clientId"));
+                cc.setStartCard(Date.valueOf(resultSet.getString("startCard")));
+                cc.setEndCard(Date.valueOf(resultSet.getString("endCard")));
+                cc.setPrice(resultSet.getInt("price"));
+                cc.setServiceId(resultSet.getInt("serviceId"));
+                clubCards.add(cc);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return clubCards;
+    }
+    public static ObservableList<TaskTable> findTaskTableQuery(String date, String lastName){
+        ObservableList<TaskTable> taskTables = FXCollections.observableArrayList();
+        var sql = "SELECT * FROM TaskTable " +
+                "WHERE dateLesson = '"+date+"' AND " +
+                " staffId IN" +
+                "(SELECT staffID FROM Staff WHERE surname LIKE '%"+lastName+"%')";
+        try {
+            ResultSet resultSet = statement.executeQuery(sql);
+            while(resultSet.next()){
+                var tt = new TaskTable();
+                tt.setCodeClient(resultSet.getInt("clientId"));
+                tt.setCodeHall(resultSet.getInt("hallId"));
+                tt.setCodeStaff(resultSet.getInt("staffId"));
+                tt.setDate(Date.valueOf(resultSet.getString("dateLesson")));
+                tt.setNumber(resultSet.getInt("taskTableId"));
+                tt.setDuration(resultSet.getInt("duration"));
+                taskTables.add(tt);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return taskTables;
+    }
 }
