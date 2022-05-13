@@ -8,6 +8,8 @@ import com.example.lab5.Classes.ClubCard;
 import com.example.lab5.Classes.Client;
 import com.example.lab5.DataBase.DataBase;
 import com.example.lab5.HelloApplication;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -101,6 +103,7 @@ public class HelloController implements Initializable {
     public TextField txtClubCardService;
     public DatePicker dbTaskTable;
     public TextField txtStaffLastName;
+    public TextArea txtClubCardInfo;
 
 
     public void btnClientAddClick(ActionEvent actionEvent) throws IOException {
@@ -117,6 +120,15 @@ public class HelloController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loadTable();
+        TableView.TableViewSelectionModel<ClubCard> selectionModel = tvClubCard.getSelectionModel();
+        selectionModel.selectedItemProperty().addListener(new ChangeListener<ClubCard>() {
+            @Override
+            public void changed(ObservableValue<? extends ClubCard> observableValue, ClubCard clubCard, ClubCard t1) {
+                if(t1!=null){
+                    txtClubCardInfo.setText(t1.toString());
+                }
+            }
+        });
     }
 
     void loadTable(){
