@@ -3,19 +3,16 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-
 
 <AnchorPane prefHeight="561.0" prefWidth="446.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lab5.Controllers.Service.ServiceEditController">
    <children>
       <AnchorPane fx:id="topPane" layoutX="31.0" layoutY="56.0" prefHeight="200.0" prefWidth="385.0">
          <children>
-            <ComboBox fx:id="cmbId" layoutX="14.0" layoutY="61.0" onAction="#cmbIdSwitch" prefWidth="150.0" />
-            <Label layoutX="63.0" layoutY="30.0" text="Номер услуги" />
-            <Button fx:id="btnFound" layoutX="40.0" layoutY="116.0" mnemonicParsing="false" onAction="#btnFoundClick" prefHeight="53.0" prefWidth="99.0" text="Найти" />
-            <TextArea fx:id="txtInfo" editable="false" layoutX="185.0" layoutY="43.0" prefHeight="61.0" prefWidth="200.0" />
+            <ComboBox fx:id="cmbId" editable="true" layoutX="108.0" layoutY="62.0" prefWidth="150.0" />
+            <Label layoutX="138.0" layoutY="32.0" text="Название услуги" />
+            <Button fx:id="btnFound" layoutX="134.0" layoutY="117.0" mnemonicParsing="false" onAction="#btnFoundClick" prefHeight="53.0" prefWidth="99.0" text="Найти" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="pane" layoutX="37.0" layoutY="256.0" prefHeight="216.0" prefWidth="372.0" visible="false">

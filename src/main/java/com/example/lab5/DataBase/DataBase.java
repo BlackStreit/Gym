@@ -92,7 +92,7 @@ public class DataBase {
         }
         sql = "CREATE TABLE IF NOT EXISTS Hall (\n" +
                 "hallId integer PRIMARY KEY AUTOINCREMENT,\n" +
-                "title text\n" +
+                "title text UNIQUE \n" +
                 ");";
         try {
             statement.executeUpdate(sql);
@@ -127,7 +127,7 @@ public class DataBase {
         }
         sql = "CREATE TABLE IF NOT EXISTS Service (\n" +
                 "serviceId integer PRIMARY KEY AUTOINCREMENT,\n" +
-                "title text,\n" +
+                "title text UNIQUE ,\n" +
                 "price integer\n" +
                 ");";
         try {
@@ -138,15 +138,11 @@ public class DataBase {
     }
 
     //Метод для добавления зала
-    public static void addHall(String title){
+    public static void addHall(String title) throws SQLException {
         //Команда для добавления
         String sql = "INSERT INTO Hall (title) VALUES ('"+title+"');";
-        try {
-            //Стейтмент отправляет команду
-            statement.executeUpdate(sql);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        //Стейтмент отправляет команду
+        statement.executeUpdate(sql);
     }
     //Получить список залов
     public static ObservableList<Hall> getHall(){
@@ -194,13 +190,9 @@ public class DataBase {
         return hall;
     }
     //изменить зал
-    public static void editHall(Hall hall){
+    public static void editHall(Hall hall) throws SQLException {
         String sql = "UPDATE Hall SET title = '"+hall.getHallName()+"' where hallId = " + hall.getHallId()+";";
-        try {
-            statement.executeUpdate(sql);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        statement.executeUpdate(sql);
     }
     //Удалить зал по id
     public static void deleteHall(int id){
@@ -260,11 +252,12 @@ public class DataBase {
         return clients;
     }
     public static Client foundClient(int id){
-        var client = new Client();
+        Client client = null;
         String sql = "select * from Clients where clientID = "+id+";";
         try {
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()){
+                client = new Client();
                 client.setAddress(resultSet.getString("address"));
                 client.setClientId(resultSet.getInt("clientID"));
                 client.setName(resultSet.getString("name"));
@@ -346,11 +339,12 @@ public class DataBase {
         return staffs;
     }
     public static Staff foundStaff(int id){
-        var staff = new Staff();
+        Staff staff = null;
         String sql = "select * from Staff where staffId = "+id+";";
         try {
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()){
+                staff = new Staff();
                 staff.setAddress(resultSet.getString("address"));
                 staff.setSalary(resultSet.getInt("salary"));
                 staff.setName(resultSet.getString("name"));
@@ -430,11 +424,12 @@ public class DataBase {
         return clubCards;
     }
     public static ClubCard foundClubCard(int id){
-        var cc = new ClubCard();
+        ClubCard cc = null;
         var sql = "SELECT * FROM ClubCard where CardId = "+id+";";
         try {
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()){
+                cc = new ClubCard();
                 cc.setCardId(resultSet.getInt("CardId"));
                 cc.setClientId(resultSet.getInt("clientId"));
                 cc.setStartCard(Date.valueOf(resultSet.getString("startCard")));
@@ -555,13 +550,9 @@ public class DataBase {
         return ids;
     }
 
-    public static void addService(Service service){
+    public static void addService(Service service) throws SQLException {
         var sql = "INSERT INTO Service (title, price) VALUES ('"+service.getTitle()+"', "+service.getCost()+");";
-        try {
-            statement.executeUpdate(sql);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        statement.executeUpdate(sql);
     }
     public static ObservableList<Service> getService(){
         ObservableList<Service> services = FXCollections.observableArrayList();
@@ -583,11 +574,12 @@ public class DataBase {
         return services;
     }
     public static Service foundService(int id){
-        var s = new Service();
+        Service s = null;
         var sql = "select * from Service where serviceId = "+id+";";
         try {
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()){
+                s = new Service();
                 s.setId(resultSet.getInt("serviceId"));
                 s.setCost(resultSet.getInt("price"));
                 s.setTitle(resultSet.getString("title"));
@@ -599,13 +591,27 @@ public class DataBase {
         }
         return s;
     }
-    public static void editService(Service service){
-        var sql = "UPDATE Service SET title = '"+service.getTitle()+"', price = "+service.getCost()+" where serviceId = "+service.getId()+";";
+    public static Service foundService(String title){
+        Service s = null;
+        var sql = "select * from Service where title = '"+title+"';";
         try {
-            statement.executeUpdate(sql);
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()){
+                s = new Service();
+                s.setId(resultSet.getInt("serviceId"));
+                s.setCost(resultSet.getInt("price"));
+                s.setTitle(resultSet.getString("title"));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return s;
+    }
+    public static void editService(Service service) throws SQLException {
+        var sql = "UPDATE Service SET title = '"+service.getTitle()+"', price = "+service.getCost()+" where serviceId = "+service.getId()+";";
+        statement.executeUpdate(sql);
     }
     public static void deleteService(int id){
         try {
@@ -627,6 +633,19 @@ public class DataBase {
             e.printStackTrace();
         }
         return ids;
+    }
+    public static ObservableList<String> getServiceTitle(){
+        ObservableList<String> titles = FXCollections.observableArrayList();
+        var sql = "select title from Service;";
+        try {
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()){
+                titles.add(resultSet.getString("title"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return titles;
     }
 
 

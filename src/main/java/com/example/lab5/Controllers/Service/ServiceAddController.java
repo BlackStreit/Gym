@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class ServiceAddController implements Initializable {
@@ -36,13 +37,17 @@ public class ServiceAddController implements Initializable {
                 errorLog.setText("Вы ввели некорректное значение стоимости");
                 return;
             }
-            DataBase.addService(ser);
             errorLog.setText("Услуга успешно добавлена");
             txtTitle.setText("");
             txtCost.setText("");
         }
         catch (Exception ex){
             errorLog.setText(ex.getMessage());
+        }
+        try {
+            DataBase.addService(ser);
+        } catch (SQLException e) {
+            errorLog.setText("Данная услуга уже существует");
         }
     }
 

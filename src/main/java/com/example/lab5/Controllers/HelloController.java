@@ -28,7 +28,6 @@ public class HelloController implements Initializable {
     //Работа с клиентом
     public TableView<Client> tvlClient;
     public TableColumn<Integer, Client> tcClientId;
-    public TableColumn<Integer, Client> tcStaffClientId;
     public TableColumn<String, Client> tcName;
     public TableColumn<String, Client> tcPatronymic;
     public TableColumn<String, Client> tcSurname;
@@ -59,7 +58,6 @@ public class HelloController implements Initializable {
     public TableColumn<LocalDate, TaskTable> tcDate;
     public TableColumn<Integer, TaskTable> tcDuration;
     public Button btnTaskAdd;
-    public Button btnTaskEdit;
     public Button btnTaskDelete;
 
     //Работа с услугами
@@ -83,12 +81,10 @@ public class HelloController implements Initializable {
     //Кнопка удалить зал
     public Button btnHallDelete;
     //Кнопка редактировать зал
-    public Button btnHallEdit;
 
     //Работа с сотрудниками
     public TableView<Staff> tvStaff;
     public TableColumn<Integer, Staff> tcStaffId;
-    public TableColumn<Integer, Staff>  tcStaffServiceId;
     public TableColumn<String, Staff>  tcStaffName;
     public TableColumn<String, Staff>  tcStaffPatronymic;
     public TableColumn<String, Staff>  tcStaffSurname;
@@ -298,17 +294,6 @@ public class HelloController implements Initializable {
 
     }
 
-    public void btnTaskEditClick(ActionEvent actionEvent) throws IOException {
-        Stage totalStage = (Stage) btnHallAdd.getScene().getWindow();
-        Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("TaskTableEdit.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Изменить занятие");
-        stage.setScene(scene);
-        totalStage.close();
-        stage.show();
-    }
-
     public void btnTaskDeleteClick(ActionEvent actionEvent) throws IOException {
         if(taskTableDel!=null){
             DataBase.deleteTaskTable(taskTableDel.getNumber());
@@ -365,17 +350,6 @@ public class HelloController implements Initializable {
             hallDel = null;
             loadTable();
         }
-    }
-
-    public void btnHallEditClick(ActionEvent actionEvent) throws IOException {
-        Stage totalStage = (Stage) btnHallAdd.getScene().getWindow();
-        Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hallEdit-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Изменить зал");
-        stage.setScene(scene);
-        totalStage.close();
-        stage.show();
     }
 
     public void btnStaffAddClick(ActionEvent actionEvent) throws IOException {

@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class HallAddController implements Initializable {
@@ -31,11 +32,15 @@ public class HallAddController implements Initializable {
         var hall = new Hall();
         try {
             hall.setHallName(tfHallTitle.getText());
-            DataBase.addHall(hall.getHallName());
             tfHallTitle.setText("");
             errorLog.setText("Зал добавлен!");
         } catch (Exception e) {
             errorLog.setText(e.getMessage());
+        }
+        try {
+            DataBase.addHall(hall.getHallName());
+        } catch (SQLException e) {
+            errorLog.setText("Данный зал уже существует");
         }
     }
 

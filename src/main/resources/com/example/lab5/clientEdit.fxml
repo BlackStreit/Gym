@@ -3,7 +3,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
@@ -11,12 +10,11 @@
    <children>
       <AnchorPane fx:id="topPane" layoutX="30.0" layoutY="37.0" prefHeight="200.0" prefWidth="413.0">
          <children>
-            <ComboBox fx:id="cmbIds" layoutX="27.0" layoutY="16.0" onAction="#cmbIdsSwitch" prefWidth="150.0" />
-            <Button fx:id="btnFound" layoutX="50.0" layoutY="67.0" mnemonicParsing="false" onAction="#btnFoundClick" prefHeight="48.0" prefWidth="83.0" text="Найти" />
-            <TextArea fx:id="txtInfo" editable="false" layoutX="186.0" layoutY="10.0" prefHeight="180.0" prefWidth="200.0" />
+            <ComboBox fx:id="cmbIds" editable="true" layoutX="132.0" layoutY="26.0" prefWidth="150.0" />
+            <Button fx:id="btnFound" layoutX="155.0" layoutY="77.0" mnemonicParsing="false" onAction="#btnFoundClick" prefHeight="48.0" prefWidth="83.0" text="Найти" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="bottomPane" layoutX="37.0" layoutY="247.0" prefHeight="393.0" prefWidth="403.0">
+      <AnchorPane fx:id="bottomPane" layoutX="37.0" layoutY="247.0" prefHeight="393.0" prefWidth="403.0" visible="false">
          <children>
             <TextField fx:id="txtName" layoutX="134.0" layoutY="36.0" />
             <TextField fx:id="txtSurname" layoutX="134.0" layoutY="98.0" />

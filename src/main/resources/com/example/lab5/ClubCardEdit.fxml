@@ -7,35 +7,32 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="704.0" prefWidth="903.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lab5.Controllers.ClubCard.ClubCardEditController">
+<AnchorPane prefHeight="538.0" prefWidth="867.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lab5.Controllers.ClubCard.ClubCardEditController">
    <children>
-      <AnchorPane fx:id="topPane" layoutX="14.0" layoutY="214.0" prefHeight="276.0" prefWidth="503.0">
+      <AnchorPane fx:id="topPane" layoutX="28.0" layoutY="48.0" prefHeight="276.0" prefWidth="207.0">
          <children>
-            <ComboBox fx:id="cmbIds" layoutX="29.0" layoutY="62.0" onAction="#cmbIdsSwitch" prefWidth="150.0" />
+            <ComboBox fx:id="cmbIds" editable="true" layoutX="17.0" layoutY="69.0" prefWidth="150.0" />
             <Label fx:id="errorLog" layoutX="29.0" layoutY="14.0" />
-            <TextArea fx:id="txtInfo" layoutX="207.0" layoutY="13.0" prefHeight="248.0" prefWidth="270.0" />
-            <Button fx:id="btnFound" layoutX="52.0" layoutY="123.0" mnemonicParsing="false" onAction="#btnFoundClick" prefHeight="49.0" prefWidth="86.0" text="Найти" />
+            <Button fx:id="btnFound" layoutX="49.0" layoutY="121.0" mnemonicParsing="false" onAction="#btnFoundClick" prefHeight="49.0" prefWidth="86.0" text="Найти" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="bottomPane" layoutX="499.0" layoutY="7.0" prefHeight="691.0" prefWidth="570.0" visible="false">
+      <AnchorPane fx:id="bottomPane" layoutX="297.0" layoutY="7.0" prefHeight="525.0" prefWidth="570.0" visible="false">
          <children>
-            <ComboBox fx:id="cmbClient" layoutX="125.0" layoutY="119.0" onAction="#cmbClientSwitch" prefWidth="150.0" />
-            <ComboBox fx:id="cmbService" layoutX="126.0" layoutY="242.0" onAction="#cmbServiceSwitch" prefWidth="150.0" />
-            <DatePicker fx:id="dateStart" layoutX="119.0" layoutY="315.0" />
+            <ComboBox fx:id="cmbService" layoutX="125.0" layoutY="87.0" onAction="#cmbServiceSwitch" prefWidth="150.0" />
+            <DatePicker fx:id="dateStart" layoutX="118.0" layoutY="160.0" />
             <DatePicker fx:id="dateEnd" layoutX="118.0" layoutY="381.0" />
-            <Label layoutX="186.0" layoutY="87.0" text="Клиент" />
-            <Label layoutX="187.0" layoutY="218.0" text="Услуга" />
-            <Label layoutX="145.0" layoutY="286.0" text="Дата начала абонемента" />
-            <Label layoutX="135.0" layoutY="358.0" text="Дата окончания абонемента" />
-            <Label layoutX="177.0" layoutY="426.0" text="Стоимость" />
-            <ComboBox fx:id="cmbPrice" layoutX="132.0" layoutY="455.0" prefWidth="150.0" />
-            <TextArea fx:id="txtClientInfo" editable="false" layoutX="327.0" layoutY="80.0" prefHeight="104.0" prefWidth="200.0" />
-            <TextArea fx:id="txtServiceInfo" editable="false" layoutX="327.0" layoutY="221.0" prefHeight="90.0" prefWidth="200.0" />
-            <Button fx:id="btnAdd" layoutX="236.0" layoutY="523.0" mnemonicParsing="false" onAction="#btnAddClick" prefHeight="58.0" prefWidth="91.0" text="Изменить" />
+            <Label layoutX="186.0" layoutY="63.0" text="Услуга" />
+            <Label layoutX="144.0" layoutY="131.0" text="Дата начала абонемента" />
+            <Label layoutX="134.0" layoutY="203.0" text="Дата окончания абонемента" />
+            <Label layoutX="176.0" layoutY="271.0" text="Стоимость" />
+            <ComboBox fx:id="cmbPrice" layoutX="131.0" layoutY="300.0" prefWidth="150.0" />
+            <TextArea fx:id="txtServiceInfo" editable="false" layoutX="326.0" layoutY="66.0" prefHeight="90.0" prefWidth="200.0" />
+            <Button fx:id="btnAdd" layoutX="155.0" layoutY="438.0" mnemonicParsing="false" onAction="#btnAddClick" prefHeight="58.0" prefWidth="91.0" text="Изменить" />
             <Label fx:id="errorLog1" layoutX="20.0" layoutY="14.0" />
+            <Label layoutX="134.0" layoutY="23.0" text="Номер клиента" />
+            <Label fx:id="lblClientId" layoutX="246.0" layoutY="23.0" />
          </children>
       </AnchorPane>
-      <Button fx:id="btnClose" layoutX="392.0" layoutY="578.0" mnemonicParsing="false" onAction="#btnCloseClick" prefHeight="58.0" prefWidth="91.0" text="На главную" />
+      <Button fx:id="btnClose" layoutX="107.0" layoutY="359.0" mnemonicParsing="false" onAction="#btnCloseClick" prefHeight="58.0" prefWidth="91.0" text="На главную" />
    </children>
 </AnchorPane>

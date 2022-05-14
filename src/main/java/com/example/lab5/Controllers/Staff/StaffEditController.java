@@ -21,7 +21,6 @@ public class StaffEditController implements Initializable {
     public AnchorPane topPane;
     public ComboBox<Integer> cmbIds = new ComboBox<>();
     public Button btnFound;
-    public TextArea txtInfo;
     public AnchorPane bottomPane;
     public TextField txtName;
     public TextField txtSurname;
@@ -43,10 +42,8 @@ public class StaffEditController implements Initializable {
         cmbIds.setItems(ids);
         if(ids.size()>=1) {
             cmbIds.setValue(ids.get(0));
-            txtInfo.setText(DataBase.foundStaff(cmbIds.getValue()).toString());
         }
         else{
-            txtInfo.setText("Все сотрудники удалены");
             cmbIds.setDisable(true);
         }
         ObservableList<Integer> salaries = FXCollections.observableArrayList();
@@ -90,7 +87,6 @@ public class StaffEditController implements Initializable {
         }
 
         try{
-            var txtPhone1 = txtPhone.getText().length();
             if(txtPhone.getText().length() != 11 && txtPhone.getText().length() != 6){
                 throw new Exception();
             }
@@ -101,7 +97,7 @@ public class StaffEditController implements Initializable {
             errorLog.setText("Вы ввели некорректное значение телефона");
             return;
         }
-        staff.setStaffId(cmbIds.getValue());
+        staff.setStaffId(Integer.parseInt(cmbIds.getEditor().getText()));
         DataBase.editStaff(staff);
         txtPhone.setText("");
         txtSalary.setText("");
@@ -114,15 +110,21 @@ public class StaffEditController implements Initializable {
         bottomPane.setVisible(false);
     }
 
-    public void cmbIdsSwitch(ActionEvent actionEvent) {
-        var info = DataBase.foundStaff(cmbIds.getValue());
-        txtInfo.setText(info.toString());
-    }
 
     public void btnFoundClick(ActionEvent actionEvent) {
-        topPane.setDisable(true);
-        bottomPane.setVisible(true);
-        var staff = DataBase.foundStaff(cmbIds.getValue());
+        int id = 0;
+        try {
+            id = Integer.parseInt(cmbIds.getEditor().getText());
+        }
+        catch (Exception ex){
+            errorLog.setText("Вы ввели некорректное значение");
+            return;
+        }
+        var staff = DataBase.foundStaff(id);
+        if(staff == null){
+            errorLog.setText("Сотрудника с таким номером не существует");
+            return;
+        }
         txtAddress.setText(staff.getAddress());
         txtLastname.setText(staff.getSurname());
         txtName.setText(staff.getName());
@@ -130,6 +132,8 @@ public class StaffEditController implements Initializable {
         txtSurname.setText(staff.getPatronymic());
         txtPhone.setText(staff.getPhoneNumber());
         cmbExp.setValue(staff.getWorkExperience());
+        topPane.setDisable(true);
+        bottomPane.setVisible(true);
     }
 
     public void txtCloseClick(ActionEvent actionEvent) throws IOException {

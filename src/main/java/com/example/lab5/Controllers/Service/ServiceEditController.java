@@ -13,11 +13,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class ServiceEditController implements Initializable {
-    public ComboBox <Integer> cmbId = new ComboBox();
-    public TextArea txtInfo;
+    public ComboBox <String> cmbId = new ComboBox();
     public Button btnFound;
     public TextField txtTitle;
     public TextField txtCost;
@@ -33,19 +33,29 @@ public class ServiceEditController implements Initializable {
     }
 
 
-    public void cmbIdSwitch(ActionEvent actionEvent) {
-        var info = DataBase.foundService(cmbId.getValue());
-        txtInfo.setText(info.toString());
-    }
 
     public void btnFoundClick(ActionEvent actionEvent) {
-        pane.setVisible(true);
-        topPane.setDisable(true);
-        var info = DataBase.foundService(cmbId.getValue());
+        try {
+            if(cmbId.getEditor().getText().length()==0){
+                throw new Exception();
+            }
+        }
+        catch (Exception ex){
+            errorLog.setText("Вы ввели некорректное значение");
+            return;
+        }
+        var info = DataBase.foundService(cmbId.getEditor().getText());
+        if(info == null){
+            errorLog.setText("Услуги с таким номером не существует");
+            return;
+        }
+        id = info.getId();
         txtTitle.setText(info.getTitle());
         txtCost.setText(String.valueOf(info.getCost()));
+        pane.setVisible(true);
+        topPane.setDisable(true);
     }
-
+    int id = 0;
     public void btnAddClick(ActionEvent actionEvent) {
         var ser = new Service();
         try{
@@ -58,19 +68,23 @@ public class ServiceEditController implements Initializable {
                 errorLog.setText("Вы ввели некорректное значение стоимости");
                 return;
             }
-            ser.setId(cmbId.getValue());
-            DataBase.editService(ser);
-            errorLog.setText("Услуга успешно изменена");
-            txtTitle.setText("");
-            txtCost.setText("");
-            pane.setVisible(false);
-            topPane.setDisable(false);
+            ser.setId(id);
+
         }
         catch (Exception ex){
             errorLog.setText(ex.getMessage());
         }
-        var info = DataBase.foundService(cmbId.getValue());
-        txtTitle.setText(info.getTitle());
+        try {
+            DataBase.editService(ser);
+        } catch (SQLException e) {
+            errorLog.setText("Данная услуга уже существует");
+        }
+        errorLog.setText("Услуга успешно изменена");
+        init();
+        txtTitle.setText("");
+        txtCost.setText("");
+        pane.setVisible(false);
+        topPane.setDisable(false);
     }
 
     public void btnCloseClick(ActionEvent actionEvent) throws IOException {
@@ -84,14 +98,12 @@ public class ServiceEditController implements Initializable {
         stage.show();
     }
     void init(){
-        var ids = DataBase.getServiceId();
+        var ids = DataBase.getServiceTitle();
         cmbId.setItems(ids);
         if(ids.size()>=1) {
             cmbId.setValue(ids.get(0));
-            txtInfo.setText(DataBase.foundService(cmbId.getValue()).toString());
         }
         else{
-            txtInfo.setText("Все залы удалены");
             cmbId.setDisable(true);
         }
     }

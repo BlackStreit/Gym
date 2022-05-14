@@ -19,7 +19,6 @@ public class ClientEditController implements Initializable {
     public AnchorPane topPane;
     public ComboBox<Integer> cmbIds = new ComboBox<>();
     public Button btnFound;
-    public TextArea txtInfo;
     public AnchorPane bottomPane;
     public TextField txtName;
     public TextField txtSurname;
@@ -39,28 +38,35 @@ public class ClientEditController implements Initializable {
         cmbIds.setItems(ids);
         if(ids.size()>=1) {
             cmbIds.setValue(ids.get(0));
-            txtInfo.setText(DataBase.foundClient(cmbIds.getValue()).toString());
         }
         else{
-            txtInfo.setText("Все клиенты удалены");
+            errorLog.setText("Все клиенты удалены");
             cmbIds.setDisable(true);
         }
     }
 
-    public void cmbIdsSwitch(ActionEvent actionEvent) {
-        var info = DataBase.foundClient(cmbIds.getValue());
-        txtInfo.setText(info.toString());
-    }
-
     public void btnFoundClick(ActionEvent actionEvent) {
-        topPane.setDisable(true);
-        bottomPane.setVisible(true);
-        var client = DataBase.foundClient(cmbIds.getValue());
+        int id = 0;
+        try {
+            id = Integer.parseInt(cmbIds.getEditor().getText());
+        }
+        catch (Exception ex){
+            errorLog.setText("Вы ввели некорректное значение");
+            return;
+        }
+
+        var client = DataBase.foundClient(id);
+        if(client==null){
+            errorLog.setText("Клиента с таким номером не существует");
+            return;
+        }
         txtAddress.setText(client.getAddress());
         txtLastname.setText(client.getSurname());
         txtName.setText(client.getName());
         txtSurname.setText(client.getPatronymic());
         txtPhone.setText(client.getPhoneNumber());
+        topPane.setDisable(true);
+        bottomPane.setVisible(true);
     }
 
     public void btnEditClick(ActionEvent actionEvent) {
@@ -96,7 +102,7 @@ public class ClientEditController implements Initializable {
             errorLog.setText("Вы ввели некорректное значение телефона");
             return;
         }
-        client.setClientId(cmbIds.getValue());
+        client.setClientId(Integer.parseInt(cmbIds.getEditor().getText()));
         DataBase.editClient(client);
         txtPhone.setText("");
         txtAddress.setText("");
@@ -106,8 +112,6 @@ public class ClientEditController implements Initializable {
         errorLog.setText("Сотрудник успешно изменен");
         topPane.setDisable(false);
         bottomPane.setVisible(false);
-        var info = DataBase.foundClient(cmbIds.getValue());
-        txtInfo.setText(info.toString());
     }
 
     public void btnCloseClick(ActionEvent actionEvent) throws IOException {

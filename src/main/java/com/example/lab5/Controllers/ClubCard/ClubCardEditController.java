@@ -22,9 +22,7 @@ import java.util.ResourceBundle;
 public class ClubCardEditController implements Initializable {
     public ComboBox<Integer> cmbIds = new ComboBox<>();
     public Label errorLog;
-    public TextArea txtInfo;
     public Button btnFound;
-    public ComboBox<Integer> cmbClient = new ComboBox<>();
     public ComboBox<Integer> cmbService = new ComboBox<>();
     public DatePicker dateStart;
     public DatePicker dateEnd;
@@ -36,6 +34,7 @@ public class ClubCardEditController implements Initializable {
     public Button btnClose;
     public AnchorPane topPane;
     public AnchorPane bottomPane;
+    public Label lblClientId;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -46,21 +45,9 @@ public class ClubCardEditController implements Initializable {
         cmbIds.setItems(ids);
         if(ids.size()>=1) {
             cmbIds.setValue(ids.get(0));
-            txtInfo.setText(DataBase.foundClubCard(cmbIds.getValue()).toString());
         }
         else{
-            txtInfo.setText("Все абонементы удалены");
             cmbIds.setDisable(true);
-        }
-        ids = DataBase.getClientIds();
-        cmbClient.setItems(ids);
-        if(ids.size()>=1) {
-            cmbClient.setValue(ids.get(0));
-            txtClientInfo.setText(DataBase.foundClient(cmbClient.getValue()).toString());
-        }
-        else{
-            txtClientInfo.setText("Нет клиентов");
-            cmbClient.setDisable(true);
         }
         var ids1 = DataBase.getServiceId();
         cmbService.setItems(ids1);
@@ -80,13 +67,9 @@ public class ClubCardEditController implements Initializable {
         cmbPrice.setValue(prices.get(0));
     }
 
-    public void cmbClientSwitch(ActionEvent actionEvent) {
-        var info = DataBase.foundClient(cmbClient.getValue());
-        txtClientInfo.setText(info.toString());
-    }
 
     public void cmbServiceSwitch(ActionEvent actionEvent) {
-        var info = DataBase.foundService(cmbClient.getValue());
+        var info = DataBase.foundService(cmbService.getValue());
         txtServiceInfo.setText(info.toString());
     }
 
@@ -115,9 +98,9 @@ public class ClubCardEditController implements Initializable {
         clubCard.setEndCard(Date.valueOf(endDate));
         clubCard.setStartCard(Date.valueOf(startDate));
         clubCard.setPrice(cmbPrice.getValue());
-        clubCard.setClientId(cmbClient.getValue());
+        clubCard.setClientId(Integer.parseInt(lblClientId.getText()));
         clubCard.setServiceId(cmbService.getValue());
-        clubCard.setCardId(cmbIds.getValue());
+        clubCard.setCardId(Integer.parseInt(cmbIds.getEditor().getText()));
         DataBase.editClubCard(clubCard);
         errorLog.setText("Абонемент успешно изменен");
         topPane.setDisable(false);
@@ -136,8 +119,20 @@ public class ClubCardEditController implements Initializable {
     }
 
     public void btnFoundClick(ActionEvent actionEvent) {
-        var cc = DataBase.foundClubCard(cmbIds.getValue());
-        cmbClient.setValue(cc.getClientId());
+        int id = 0;
+        try {
+            id = Integer.parseInt(cmbIds.getEditor().getText());
+        }
+        catch (Exception ex){
+            errorLog.setText("Вы ввели некорректное значение");
+            return;
+        }
+        var cc = DataBase.foundClubCard(id);
+        if(cc == null){
+            errorLog.setText("Абонемента с таким номером не существует");
+            return;
+        }
+        lblClientId.setText(String.valueOf(cc.getClientId()));
         cmbService.setValue(cc.getServiceId());
         dateEnd.setValue(LocalDate.parse(cc.getEndCard().toString()));
         dateStart.setValue(LocalDate.parse(cc.getStartCard().toString()));
@@ -146,8 +141,4 @@ public class ClubCardEditController implements Initializable {
         bottomPane.setVisible(true);
     }
 
-    public void cmbIdsSwitch(ActionEvent actionEvent) {
-        var info = DataBase.foundClubCard(cmbIds.getValue());
-        txtInfo.setText(info.toString());
-    }
 }
