@@ -104,6 +104,13 @@ public class HelloController implements Initializable {
     public DatePicker dbTaskTable;
     public TextField txtStaffLastName;
     public TextArea txtClubCardInfo;
+    public TextArea txtTaskTableInfo;
+    public TextField txtServiceQuery;
+    public TextArea txtServiceInfo;
+    public TextField txtStaffQuery;
+    public TextArea txtStaffInfo;
+    public TextField txtHallQuery;
+    public TextArea txtHallInfo;
 
 
     public void btnClientAddClick(ActionEvent actionEvent) throws IOException {
@@ -116,7 +123,12 @@ public class HelloController implements Initializable {
         totalStage.close();
         stage.show();
     }
-
+    Hall hallDel;
+    ClubCard clubCardDel;
+    Client clientDel;
+    Service serviceDel;
+    Staff staffDel;
+    TaskTable taskTableDel;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loadTable();
@@ -125,7 +137,52 @@ public class HelloController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends ClubCard> observableValue, ClubCard clubCard, ClubCard t1) {
                 if(t1!=null){
-                    txtClubCardInfo.setText(t1.toString());
+                    clubCardDel = t1;
+                }
+            }
+        });
+        TableView.TableViewSelectionModel<Hall> selectionModelHall = tvHall.getSelectionModel();
+        selectionModelHall.selectedItemProperty().addListener(new ChangeListener<Hall>() {
+            @Override
+            public void changed(ObservableValue<? extends Hall> observableValue, Hall hall, Hall t1) {
+                if(t1 != null){
+                    hallDel = t1;
+                }
+            }
+        });
+        TableView.TableViewSelectionModel<TaskTable> selectionModelTT = tvTaskTable.getSelectionModel();
+        selectionModelTT.selectedItemProperty().addListener(new ChangeListener<TaskTable>() {
+            @Override
+            public void changed(ObservableValue<? extends TaskTable> observableValue, TaskTable taskTable, TaskTable t1) {
+                if(t1!=null){
+                    taskTableDel = t1;
+                }
+            }
+        });
+        TableView.TableViewSelectionModel<Client> selectionModelClient = tvlClient.getSelectionModel();
+        selectionModelClient.selectedItemProperty().addListener(new ChangeListener<Client>() {
+            @Override
+            public void changed(ObservableValue<? extends Client> observableValue, Client client, Client t1) {
+                if(t1!= null){
+                    clientDel = t1;
+                }
+            }
+        });
+        TableView.TableViewSelectionModel<Service> selectionModelService = tvService.getSelectionModel();
+        selectionModelService.selectedItemProperty().addListener(new ChangeListener<Service>() {
+            @Override
+            public void changed(ObservableValue<? extends Service> observableValue, Service client, Service t1) {
+                if(t1!=null){
+                    serviceDel = t1;
+                }
+            }
+        });
+        TableView.TableViewSelectionModel<Staff> selectionModelStaff = tvStaff.getSelectionModel();
+        selectionModelStaff.selectedItemProperty().addListener(new ChangeListener<Staff>() {
+            @Override
+            public void changed(ObservableValue<? extends Staff> observableValue, Staff staff, Staff t1) {
+                if(t1!=null){
+                    staffDel = t1;
                 }
             }
         });
@@ -191,14 +248,11 @@ public class HelloController implements Initializable {
     }
 
     public void btnClientDeleteClick(ActionEvent actionEvent) throws IOException {
-        Stage totalStage = (Stage) btnHallAdd.getScene().getWindow();
-        Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("clientDelete.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Удалить клиента");
-        stage.setScene(scene);
-        totalStage.close();
-        stage.show();
+        if(clientDel!=null){
+            DataBase.deleteClient(clientDel.getClientId());
+            clientDel = null;
+            loadTable();
+        }
     }
 
     public void btnCardAddClick(ActionEvent actionEvent) throws IOException {
@@ -224,14 +278,11 @@ public class HelloController implements Initializable {
     }
 
     public void btnCardDeleteClick(ActionEvent actionEvent) throws IOException {
-        Stage totalStage = (Stage) btnHallAdd.getScene().getWindow();
-        Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("ClubCardDelete.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Удалить абонемент");
-        stage.setScene(scene);
-        totalStage.close();
-        stage.show();
+        if(clubCardDel!=null){
+            DataBase.deleteClubCard(clubCardDel.getCardId());
+            clubCardDel = null;
+            loadTable();
+        }
     }
 
     public void btnTaskAddClick(ActionEvent actionEvent) throws IOException {
@@ -258,15 +309,11 @@ public class HelloController implements Initializable {
     }
 
     public void btnTaskDeleteClick(ActionEvent actionEvent) throws IOException {
-        Stage totalStage = (Stage) btnHallAdd.getScene().getWindow();
-        Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("TaskTableDelete.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Удалить занятие");
-        stage.setScene(scene);
-        totalStage.close();
-        stage.show();
-
+        if(taskTableDel!=null){
+            DataBase.deleteTaskTable(taskTableDel.getNumber());
+            taskTableDel = null;
+            loadTable();
+        }
     }
 
     public void btnServiceAddClick(ActionEvent actionEvent) throws IOException {
@@ -281,14 +328,11 @@ public class HelloController implements Initializable {
     }
 
     public void btnServiceDeleteClick(ActionEvent actionEvent) throws IOException {
-        Stage totalStage = (Stage) btnHallAdd.getScene().getWindow();
-        Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("ServiceDelete.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Удалить услугу");
-        stage.setScene(scene);
-        totalStage.close();
-        stage.show();
+        if(serviceDel!=null){
+            DataBase.deleteService(serviceDel.getId());
+            serviceDel = null;
+            loadTable();
+        }
     }
 
     public void btnServiceEditClick(ActionEvent actionEvent) throws IOException {
@@ -315,14 +359,11 @@ public class HelloController implements Initializable {
     }
 
     public void btnHallDeleteClick(ActionEvent actionEvent) throws IOException {
-        Stage totalStage = (Stage) btnHallAdd.getScene().getWindow();
-        Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hallDelete-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Удалить зал");
-        stage.setScene(scene);
-        totalStage.close();
-        stage.show();
+        if(hallDel != null){
+            DataBase.deleteHall(hallDel.getHallId());
+            hallDel = null;
+            loadTable();
+        }
     }
 
     public void btnHallEditClick(ActionEvent actionEvent) throws IOException {
@@ -359,14 +400,11 @@ public class HelloController implements Initializable {
     }
 
     public void btnStaffDeleteClick(ActionEvent actionEvent) throws IOException {
-        Stage totalStage = (Stage) btnHallAdd.getScene().getWindow();
-        Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("staffDelete.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Удалить сотрудника");
-        stage.setScene(scene);
-        totalStage.close();
-        stage.show();
+        if(staffDel != null){
+            DataBase.deleteStaff(staffDel.getStaffId());
+            staffDel = null;
+            loadTable();
+        }
     }
 
     public void txtClientNameQueryPress(KeyEvent actionEvent) {
@@ -380,12 +418,76 @@ public class HelloController implements Initializable {
     }
 
     public void dbTaskTableClick(ActionEvent actionEvent) {
-        var tt = DataBase.findTaskTableQuery(dbTaskTable.getValue().toString(), txtStaffLastName.getText());
-        tvTaskTable.setItems(tt);
+        if(dbTaskTable.getValue() != null) {
+            var tt = DataBase.findTaskTableQuery(dbTaskTable.getValue().toString(), txtStaffLastName.getText());
+            tvTaskTable.setItems(tt);
+        }
     }
 
     public void txtStaffLastNamePress(KeyEvent keyEvent) {
-        var tt = DataBase.findTaskTableQuery(dbTaskTable.getValue().toString(), txtStaffLastName.getText());
-        tvTaskTable.setItems(tt);
+        if(dbTaskTable.getValue() != null) {
+            var tt = DataBase.findTaskTableQuery(dbTaskTable.getValue().toString(), txtStaffLastName.getText());
+            tvTaskTable.setItems(tt);
+        }
+        else {
+            var tt = DataBase.findTaskTableQuery("", txtStaffLastName.getText());
+            tvTaskTable.setItems(tt);
+        }
+    }
+
+    public void txtServiceQueryPress(KeyEvent keyEvent) {
+        if(txtServiceQuery.getText().length()==0){
+            txtServiceInfo.setText("");
+            return;
+        }
+        var cc = DataBase.findServiceTableQuery(txtServiceQuery.getText());
+        var ans = "";
+        for(int i = 0; i < cc.size(); i++){
+            ans+="Номер карты:" + cc.get(i).getCardId() +"\n" +
+                    "Номер клиента: " + cc.get(i).getClientId()+"\n" +
+                    "Фамилия: " + DataBase.foundClient(cc.get(i).getClientId()).getSurname()+"\n";
+            if(i!=cc.size()-1) {
+                ans+="------------\n";
+            }
+        }
+        txtServiceInfo.setText(ans);
+    }
+
+    public void txtStaffQueryPress(KeyEvent keyEvent) {
+        if(txtStaffQuery.getText().length()==0){
+            txtStaffInfo.setText("");
+            return;
+        }
+        var staff = DataBase.findStaffTableQuery(txtStaffQuery.getText());
+        var ans = "";
+        for(int i = 0; i < staff.size(); i++){
+            ans+="Номер клиента: " + staff.get(i).getCodeClient()+"\n" +
+                    "Фамилия: " + DataBase.foundClient(staff.get(i).getCodeClient()) + "\n" +
+                    "Номер зала: " + staff.get(i).getCodeHall()+"\n" +
+                    "Дата: " + staff.get(i).getDate()+"\n";
+            if(i!=staff.size()-1) {
+                ans+="------------\n";
+            }
+        }
+        txtStaffInfo.setText(ans);
+    }
+
+    public void txtHallQueryPress(KeyEvent keyEvent) {
+        if(txtHallQuery.getText().length()==0){
+            txtHallInfo.setText("");
+            return;
+        }
+        var halls = DataBase.findHallTableQuery(txtHallQuery.getText());
+        var ans = "";
+        for(int i = 0; i < halls.size(); i++){
+            ans+="Номер сотрудника: " + halls.get(i).getCodeStaff()+"\n" +
+                    "Номер клиента: " + halls.get(i).getCodeClient()+"\n" +
+                    "Дата: " + halls.get(i).getDate() + "\n" +
+                    "Продолжительность: " + halls.get(i).getDuration()+"\n";
+            if(i!=halls.size()-1) {
+                ans+="------------\n";
+            }
+            txtHallInfo.setText(ans);
+        }
     }
 }

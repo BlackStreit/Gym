@@ -69,7 +69,7 @@ public class ClubCardAddController implements Initializable {
     }
 
     public void cmbServiceSwitch(ActionEvent actionEvent) {
-        var info = DataBase.foundService(cmbClient.getValue());
+        var info = DataBase.foundService(cmbService.getValue());
         txtServiceInfo.setText(info.toString());
     }
 
