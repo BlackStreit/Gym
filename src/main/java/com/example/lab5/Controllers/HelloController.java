@@ -111,6 +111,7 @@ public class HelloController implements Initializable {
     public TextArea txtStaffInfo;
     public TextField txtHallQuery;
     public TextArea txtHallInfo;
+    public Button btnDateDel;
 
 
     public void btnClientAddClick(ActionEvent actionEvent) throws IOException {
@@ -418,7 +419,7 @@ public class HelloController implements Initializable {
     }
 
     public void dbTaskTableClick(ActionEvent actionEvent) {
-        if(dbTaskTable.getValue() != null) {
+        if(dbTaskTable.getValue()!=null) {
             var tt = DataBase.findTaskTableQuery(dbTaskTable.getValue().toString(), txtStaffLastName.getText());
             tvTaskTable.setItems(tt);
         }
@@ -489,5 +490,11 @@ public class HelloController implements Initializable {
             }
             txtHallInfo.setText(ans);
         }
+    }
+
+    public void btnDateDelClick(ActionEvent actionEvent) {
+        dbTaskTable.setValue(null);
+        var tt = DataBase.findTaskTableQuery("", txtStaffLastName.getText());
+        tvTaskTable.setItems(tt);
     }
 }

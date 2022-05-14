@@ -675,7 +675,7 @@ public class DataBase {
     public static ObservableList<TaskTable> findTaskTableQuery(String date, String lastName){
         ObservableList<TaskTable> taskTables = FXCollections.observableArrayList();
         var sql = "SELECT * FROM TaskTable " +
-                "WHERE dateLesson = '"+date+"' AND " +
+                "WHERE dateLesson LIKE '%"+date+"%' AND " +
                 " staffId IN" +
                 "(SELECT staffID FROM Staff WHERE surname LIKE '%"+lastName+"%')";
         try {
