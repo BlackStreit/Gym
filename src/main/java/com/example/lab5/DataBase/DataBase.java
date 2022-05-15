@@ -473,6 +473,7 @@ public class DataBase {
         return ids;
     }
 
+
     public static void addTaskTable(TaskTable tt){
         var sql = "INSERT INTO TaskTable (staffId, hallId, clientId, dateLesson, duration) VALUES " +
                 "("+tt.getCodeStaff()+", "+tt.getCodeHall()+", "+tt.getCodeClient()+", '"+tt.getDate()+"', "+tt.getDuration()+");";

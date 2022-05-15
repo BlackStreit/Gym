@@ -135,6 +135,7 @@ public class HelloController implements Initializable {
             public void changed(ObservableValue<? extends ClubCard> observableValue, ClubCard clubCard, ClubCard t1) {
                 if(t1!=null){
                     clubCardDel = t1;
+                    txtClubCardInfo.setText(t1.toString());
                 }
             }
         });
@@ -153,6 +154,7 @@ public class HelloController implements Initializable {
             public void changed(ObservableValue<? extends TaskTable> observableValue, TaskTable taskTable, TaskTable t1) {
                 if(t1!=null){
                     taskTableDel = t1;
+                    txtTaskTableInfo.setText(t1.toString());
                 }
             }
         });
@@ -268,7 +270,7 @@ public class HelloController implements Initializable {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("ClubCardEdit.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Удалить абонемент");
+        stage.setTitle("Изменить абонемент");
         stage.setScene(scene);
         totalStage.close();
         stage.show();
