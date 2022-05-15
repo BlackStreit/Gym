@@ -9,9 +9,9 @@
 
 <AnchorPane prefHeight="554.0" prefWidth="475.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lab5.Controllers.TaskTable.TaskTableAddController">
    <children>
-      <ComboBox fx:id="cmbStaff" layoutX="76.0" layoutY="64.0" onAction="#cmbStaffSwitch" prefWidth="150.0" />
-      <ComboBox fx:id="cmbHall" layoutX="76.0" layoutY="173.0" onAction="#cmbHallSwitch" prefWidth="150.0" />
-      <ComboBox fx:id="cmbClient" layoutX="76.0" layoutY="287.0" onAction="#cmbClientSwitch" prefWidth="150.0" />
+      <ComboBox fx:id="cmbStaff" editable="true" layoutX="76.0" layoutY="64.0" onAction="#cmbStaffSwitch" onKeyReleased="#cmbStaffPress" prefWidth="150.0" />
+      <ComboBox fx:id="cmbHall" editable="true" layoutX="76.0" layoutY="173.0" onAction="#cmbHallSwitch" onKeyReleased="#cmbHallPress" prefWidth="150.0" />
+      <ComboBox fx:id="cmbClient" editable="true" layoutX="76.0" layoutY="287.0" onAction="#cmbClientSwitch" onKeyReleased="#cmbClientPress" prefWidth="150.0" />
       <DatePicker fx:id="dpDate" layoutX="64.0" layoutY="396.0" />
       <TextArea fx:id="txtStaffInfo" editable="false" layoutX="246.0" layoutY="57.0" prefHeight="100.0" prefWidth="200.0" />
       <TextArea fx:id="txtHallInfo" editable="false" layoutX="246.0" layoutY="173.0" prefHeight="100.0" prefWidth="200.0" />

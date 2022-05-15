@@ -221,6 +221,40 @@ public class DataBase {
         }
         return ids;
     }
+    public static ObservableList<String> getHallTitle(){
+        ObservableList<String> ids = FXCollections.observableArrayList();
+        var sql = "select title from Hall;";
+        try {
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()){
+                ids.add(resultSet.getString("title"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ids;
+    }
+    public static Hall foundHall(String title){
+        if(title.length() == 0){
+            return null;
+        }
+        Hall hall = null;
+        String sql = "SELECT * FROM Hall where title  LIKE '%"+title+"%';";
+        try {
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()){
+                hall = new Hall();
+                hall.setHallName(resultSet.getString("title"));
+                hall.setHallId(resultSet.getInt("hallId"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return hall;
+    }
 
     public static void addClients(Client client){
         String sql ="INSERT INTO Clients ( address, phone, name, patronymic, surname) VALUES ('"+client.getAddress()+"', " +

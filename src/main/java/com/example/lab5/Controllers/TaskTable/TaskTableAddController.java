@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -20,7 +21,7 @@ import java.util.ResourceBundle;
 
 public class TaskTableAddController implements Initializable {
     public ComboBox<Integer> cmbStaff = new ComboBox<>();
-    public ComboBox<Integer> cmbHall = new ComboBox<>();
+    public ComboBox<String> cmbHall = new ComboBox<>();
     public TextArea txtStaffInfo;
     public TextArea txtHallInfo;
     public TextArea txtClientInfo;
@@ -56,10 +57,10 @@ public class TaskTableAddController implements Initializable {
             txtStaffInfo.setText("Нет персонала");
             cmbStaff.setDisable(true);
         }
-        var ids2 = DataBase.getHallId();
+        var ids2 = DataBase.getHallTitle();
         cmbHall.setItems(ids2);
         if(ids2.size()>=1) {
-            cmbHall.setValue(ids1.get(0));
+            cmbHall.setValue(ids2.get(0));
             txtHallInfo.setText(DataBase.foundHall(cmbHall.getValue()).toString());
         }
         else{
@@ -105,11 +106,25 @@ public class TaskTableAddController implements Initializable {
             errorLog.setText("Дата занятия меньше сегодняшней даты");
             return;
         }
+        if(DataBase.foundHall(cmbHall.getEditor().getText()) == null){
+            return;
+        }
+        try{
+            if(DataBase.foundClient(Integer.parseInt(cmbClient.getEditor().getText())) == null){
+                return;
+            }
+            if(DataBase.foundStaff(Integer.parseInt(cmbStaff.getEditor().getText())) == null){
+                return;
+            }
+        }
+        catch (Exception ex){
+            return;
+        }
         tt.setDuration(cmbDuration.getValue());
         tt.setDate(Date.valueOf(dpDate.getValue()));
-        tt.setCodeStaff(cmbStaff.getValue());
-        tt.setCodeHall(cmbHall.getValue());
-        tt.setCodeClient(cmbHall.getValue());
+        tt.setCodeStaff(Integer.parseInt(cmbStaff.getEditor().getText()));
+        tt.setCodeHall(DataBase.foundHall(cmbHall.getEditor().getText()).getHallId());
+        tt.setCodeClient(Integer.parseInt(cmbClient.getEditor().getText()));
         DataBase.addTaskTable(tt);
         errorLog.setText("Занятие успешно добавлено");
     }
@@ -123,5 +138,61 @@ public class TaskTableAddController implements Initializable {
         stage.setScene(scene);
         totalStage.close();
         stage.show();
+    }
+
+    public void cmbStaffPress(KeyEvent keyEvent) {
+        errorLog.setText("");
+        var id = 0;
+        try {
+            if(cmbStaff.getEditor().getText().length() != 0) {
+                id = Integer.parseInt(cmbStaff.getEditor().getText());
+            }
+            else{
+                return;
+            }
+        }
+        catch (Exception ex){
+            errorLog.setText("Вы ввели не корректное значение номера сотрудника");
+            return;
+        }
+        var info = DataBase.foundStaff(id);
+        if(info == null){
+            txtStaffInfo.setText("Сотрудника с таким номером не существует");
+            return;
+        }
+        txtStaffInfo.setText(info.toString());
+    }
+
+    public void cmbHallPress(KeyEvent keyEvent) {
+        errorLog.setText("");
+        var info = DataBase.foundHall(cmbHall.getEditor().getText());
+        if(info == null){
+            txtHallInfo.setText("Клиента с таким номером не существует");
+            return;
+        }
+        txtHallInfo.setText(info.toString());
+    }
+
+    public void cmbClientPress(KeyEvent keyEvent) {
+        errorLog.setText("");
+        var id = 0;
+        try {
+            if(cmbClient.getEditor().getText().length() != 0) {
+                id = Integer.parseInt(cmbClient.getEditor().getText());
+            }
+            else{
+                return;
+            }
+        }
+        catch (Exception ex){
+            errorLog.setText("Вы ввели не корректное значение номера клиента");
+            return;
+        }
+        var info = DataBase.foundClient(id);
+        if(info == null){
+            txtClientInfo.setText("Клиента с таким номером не существует");
+            return;
+        }
+        txtClientInfo.setText(info.toString());
     }
 }
