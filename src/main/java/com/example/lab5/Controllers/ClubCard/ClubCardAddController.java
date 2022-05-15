@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -19,7 +20,7 @@ import java.util.ResourceBundle;
 
 public class ClubCardAddController implements Initializable {
     public ComboBox<Integer> cmbClient = new ComboBox<>();
-    public ComboBox<Integer> cmbService= new ComboBox<>();
+    public ComboBox<String> cmbService= new ComboBox<>();
     public DatePicker dateStart;
     public DatePicker dateEnd;
     public ComboBox<Integer> cmbPrice = new ComboBox<>();
@@ -45,7 +46,7 @@ public class ClubCardAddController implements Initializable {
             txtClientInfo.setText("Нет клиентов");
             cmbClient.setDisable(true);
         }
-        var ids1 = DataBase.getServiceId();
+        var ids1 = DataBase.getServiceTitle();
         cmbService.setItems(ids1);
         if(ids1.size()>=1) {
             cmbService.setValue(ids1.get(0));
@@ -73,6 +74,7 @@ public class ClubCardAddController implements Initializable {
         txtServiceInfo.setText(info.toString());
     }
 
+
     public void btnAddClick(ActionEvent actionEvent) {
         var clubCard = new ClubCard();
         if(dateStart.getValue() == null){
@@ -95,11 +97,22 @@ public class ClubCardAddController implements Initializable {
             errorLog.setText("Дата начала больше даты окончания");
             return;
         }
+         if(DataBase.foundService(cmbService.getEditor().getText()) == null) {
+             return;
+         }
+         try {
+             if (DataBase.foundClient(Integer.parseInt(cmbClient.getEditor().getText())) == null) {
+                 return;
+             }
+         }
+        catch (Exception e){
+            return;
+        }
         clubCard.setEndCard(Date.valueOf(endDate));
         clubCard.setStartCard(Date.valueOf(startDate));
         clubCard.setPrice(cmbPrice.getValue());
-        clubCard.setClientId(cmbClient.getValue());
-        clubCard.setServiceId(cmbService.getValue());
+        clubCard.setClientId(Integer.parseInt(cmbClient.getEditor().getText()));
+        clubCard.setServiceId(DataBase.foundService(cmbService.getEditor().getText()).getId());
         DataBase.addClubCard(clubCard);
         errorLog.setText("Абонемент успешно добавлен");
     }
@@ -113,5 +126,38 @@ public class ClubCardAddController implements Initializable {
         stage.setScene(scene);
         totalStage.close();
         stage.show();
+    }
+
+    public void cmbClientPress(KeyEvent keyEvent) {
+        errorLog.setText("");
+        var id = 0;
+        try {
+            if(cmbClient.getEditor().getText().length() != 0) {
+                id = Integer.parseInt(cmbClient.getEditor().getText());
+            }
+            else{
+                return;
+            }
+        }
+        catch (Exception ex){
+            errorLog.setText("Вы ввели не корректное значение номера клиента");
+            return;
+        }
+        var info = DataBase.foundClient(id);
+        if(info == null){
+            txtClientInfo.setText("Клиента с таким номером не существует");
+            return;
+        }
+        txtClientInfo.setText(info.toString());
+    }
+
+    public void cmbServicePress(KeyEvent keyEvent) {
+        errorLog.setText("");
+        var info = DataBase.foundService(cmbService.getEditor().getText());
+        if(info == null){
+            txtServiceInfo.setText("Услуги с таким названием не существует");
+            return;
+        }
+        txtServiceInfo.setText(info.toString());
     }
 }

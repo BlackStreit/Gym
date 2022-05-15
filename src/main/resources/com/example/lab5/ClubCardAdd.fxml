@@ -9,8 +9,8 @@
 
 <AnchorPane prefHeight="691.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lab5.Controllers.ClubCard.ClubCardAddController">
    <children>
-      <ComboBox fx:id="cmbClient" layoutX="125.0" layoutY="119.0" onAction="#cmbClientSwitch" prefWidth="150.0" />
-      <ComboBox fx:id="cmbService" layoutX="126.0" layoutY="242.0" onAction="#cmbServiceSwitch" prefWidth="150.0" />
+      <ComboBox fx:id="cmbClient" editable="true" layoutX="125.0" layoutY="119.0" onAction="#cmbClientSwitch" onKeyReleased="#cmbClientPress" prefWidth="150.0" />
+      <ComboBox fx:id="cmbService" editable="true" layoutX="126.0" layoutY="242.0" onAction="#cmbServiceSwitch" onKeyReleased="#cmbServicePress" prefWidth="150.0" />
       <DatePicker fx:id="dateStart" layoutX="119.0" layoutY="315.0" />
       <DatePicker fx:id="dateEnd" layoutX="118.0" layoutY="381.0" />
       <Label layoutX="186.0" layoutY="87.0" text="Клиент" />

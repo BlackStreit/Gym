@@ -593,8 +593,11 @@ public class DataBase {
         return s;
     }
     public static Service foundService(String title){
+        if(title.length() == 0){
+            return null;
+        }
         Service s = null;
-        var sql = "select * from Service where title = '"+title+"';";
+        var sql = "select * from Service where title LIKE '%"+title+"%';";
         try {
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()){

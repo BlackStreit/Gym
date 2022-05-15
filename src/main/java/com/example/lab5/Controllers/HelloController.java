@@ -240,7 +240,7 @@ public class HelloController implements Initializable {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("clientEdit.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Удалить клиента");
+        stage.setTitle("Изменить клиента");
         stage.setScene(scene);
         totalStage.close();
         stage.show();
