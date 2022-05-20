@@ -1,6 +1,8 @@
 package com.example.lab5.Classes;
 
 import com.example.lab5.DataBase.DataBase;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -12,6 +14,8 @@ public class ClubCard {
     private int price;
     private int serviceId;
     private int clientId;
+    private String serviceInfo;
+    private String clientInfo;
 
     public ClubCard(int cardId, Date startCard, Date endCard, int price, int serviceId, int clientId) {
         this.cardId = cardId;
@@ -22,6 +26,24 @@ public class ClubCard {
         this.clientId = clientId;
     }
 
+    public String getServiceInfo() {
+         var service = DataBase.foundService(serviceId);
+        serviceInfo = String.format("""
+                Название: %s
+                """, service.getTitle());
+        return serviceInfo;
+    }
+
+    public String getClientInfo() {
+         var client = DataBase.foundClient(clientId);
+        clientInfo = String.format("""
+                Имя: %s
+                Фамилия: %s
+                Отчество: %s
+                """, client.getName(), client.getPatronymic(), client.getSurname());
+        return clientInfo;
+    }
+
     public ClubCard() {
         this.cardId = 0;
         this.startCard = Date.valueOf(LocalDate.now());
@@ -29,6 +51,8 @@ public class ClubCard {
         this.price = 0;
         this.serviceId = 0;
         this.clientId = 0;
+        serviceInfo = "";
+        clientInfo="";
     }
 
     public int getCardId() {
@@ -69,6 +93,7 @@ public class ClubCard {
 
     public void setServiceId(int serviceId) {
         this.serviceId = serviceId;
+
     }
 
     public int getClientId() {
@@ -87,4 +112,5 @@ public class ClubCard {
                 "Дата конца абонемента: " + endCard.toString() +"\n" +
                 "Стоимость: " + price;
     }
+
 }

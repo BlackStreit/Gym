@@ -197,17 +197,17 @@ public class HelloController implements Initializable {
         tvlClient.setItems(DataBase.getClient());
 
         tcCardId.setCellValueFactory(new PropertyValueFactory<>("cardId"));
-        tcServiceClubId.setCellValueFactory(new PropertyValueFactory<>("serviceId"));
-        tcClientCardId.setCellValueFactory(new PropertyValueFactory<>("clientId"));
+        tcServiceClubId.setCellValueFactory(new PropertyValueFactory<>("serviceInfo"));
+        tcClientCardId.setCellValueFactory(new PropertyValueFactory<>("clientInfo"));
         tcPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
         tcStartDate.setCellValueFactory(new PropertyValueFactory<>("startCard"));
         tcEndCard.setCellValueFactory(new PropertyValueFactory<>("endCard"));
         tvClubCard.setItems(DataBase.getClubCard());
 
         tcNumber.setCellValueFactory(new PropertyValueFactory<>("number"));
-        tcCodeStaff.setCellValueFactory(new PropertyValueFactory<>("codeStaff"));
-        tcCodeClient.setCellValueFactory(new PropertyValueFactory<>("codeClient"));
-        tcCodeHall.setCellValueFactory(new PropertyValueFactory<>("codeHall"));
+        tcCodeStaff.setCellValueFactory(new PropertyValueFactory<>("staffInfo"));
+        tcCodeClient.setCellValueFactory(new PropertyValueFactory<>("clientInfo"));
+        tcCodeHall.setCellValueFactory(new PropertyValueFactory<>("hallInfo"));
         tcDate.setCellValueFactory(new PropertyValueFactory<>("date"));
         tcDuration.setCellValueFactory(new PropertyValueFactory<>("duration"));
         tvTaskTable.setItems(DataBase.getTaskTable());

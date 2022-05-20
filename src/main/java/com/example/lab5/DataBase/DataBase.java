@@ -445,11 +445,11 @@ public class DataBase {
             while (resultSet.next()){
                 var cc = new ClubCard();
                 cc.setCardId(resultSet.getInt("CardId"));
-                cc.setClientId(resultSet.getInt("clientId"));
                 cc.setStartCard(Date.valueOf(resultSet.getString("startCard")));
                 cc.setEndCard(Date.valueOf(resultSet.getString("endCard")));
                 cc.setPrice(resultSet.getInt("price"));
                 cc.setServiceId(resultSet.getInt("serviceId"));
+                cc.setClientId(resultSet.getInt("clientId"));
                 clubCards.add(cc);
             }
         } catch (SQLException e) {

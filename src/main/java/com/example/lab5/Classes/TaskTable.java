@@ -19,6 +19,38 @@ public class TaskTable {
     //Продолжительность
     private int duration;
 
+    private String clientInfo;
+    private String staffInfo;
+    private String hallInfo;
+
+    public String getClientInfo() {
+        var client = DataBase.foundClient(codeClient);
+        clientInfo = String.format("""
+                Имя: %s
+                Фамилия: %s
+                Отчество: %s
+                """, client.getName(), client.getPatronymic(), client.getSurname());
+        return clientInfo;
+    }
+
+    public String getStaffInfo() {
+        var staff = DataBase.foundStaff(codeStaff);
+        staffInfo = String.format("""
+                Имя: %s
+                Фамилия: %s
+                Отчество: %s
+                """, staff.getName(), staff.getPatronymic(), staff.getSurname());
+        return staffInfo;
+    }
+
+    public String getHallInfo() {
+        var hall = DataBase.foundHall(codeHall);
+        hallInfo = String.format("""
+                Название: %s
+                """, hall.getHallName());
+        return hallInfo;
+    }
+
     public TaskTable(int number, int codeEmployee, int codeClient, int codeRoom, Date date, int duration) {
         this.number = number;
         this.codeStaff = codeEmployee;
@@ -35,6 +67,9 @@ public class TaskTable {
         this.codeHall = 0;
         this.date = Date.valueOf(LocalDate.now());
         this.duration = 0;
+        clientInfo = "";
+        staffInfo = "";
+        hallInfo = "";
     }
     public int getCodeClient() {
         return codeClient;
