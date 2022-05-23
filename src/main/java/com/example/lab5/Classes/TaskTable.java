@@ -31,6 +31,7 @@ public class TaskTable {
                 Отчество: %s
                 """, client.getName(), client.getPatronymic(), client.getSurname());
         return clientInfo;
+
     }
 
     public String getStaffInfo() {
