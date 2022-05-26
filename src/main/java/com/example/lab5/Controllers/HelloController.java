@@ -422,7 +422,9 @@ public class HelloController implements Initializable {
         for(int i = 0; i < cc.size(); i++){
             ans+="Номер карты:" + cc.get(i).getCardId() +"\n" +
                     "Номер клиента: " + cc.get(i).getClientId()+"\n" +
-                    "Фамилия: " + DataBase.foundClient(cc.get(i).getClientId()).getSurname()+"\n";
+                    "Фамилия: " + DataBase.foundClient(cc.get(i).getClientId()).getSurname()+"\n"+
+                    "Имя : " + DataBase.foundClient(cc.get(i).getClientId()).getName()+"\n"+
+                    "Отчество: " + DataBase.foundClient(cc.get(i).getClientId()).getPatronymic()+"\n";
             if(i!=cc.size()-1) {
                 ans+="------------\n";
             }
@@ -458,7 +460,9 @@ public class HelloController implements Initializable {
         var ans = "";
         for(int i = 0; i < halls.size(); i++){
             ans+="Номер сотрудника: " + halls.get(i).getCodeStaff()+"\n" +
+                    "Фамилия сотрудника: " + DataBase.foundStaff(halls.get(i).getCodeStaff()).getSurname() + "\n"+
                     "Номер клиента: " + halls.get(i).getCodeClient()+"\n" +
+                    "Фамилия клиента: " + DataBase.foundClient(halls.get(i).getCodeClient()).getSurname() + "\n"+
                     "Дата: " + halls.get(i).getDate() + "\n" +
                     "Продолжительность: " + halls.get(i).getDuration()+"\n";
             if(i!=halls.size()-1) {
