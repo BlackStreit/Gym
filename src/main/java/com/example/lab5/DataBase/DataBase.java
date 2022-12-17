@@ -135,6 +135,18 @@ public class DataBase {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        sql = "CREATE TABLE IF NOT EXISTS Users (\n" +
+                "id integer PRIMARY KEY AUTOINCREMENT,\n" +
+                "login text UNIQUE ,\n" +
+                "password integer\n" +
+                ");";
+        try {
+            statement.executeUpdate(sql);
+            //sql = "Insert INTO Users (login, password) VALUES('login', 'password')";
+            //statement.executeUpdate(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     //Метод для добавления зала
@@ -817,5 +829,22 @@ public class DataBase {
             e.printStackTrace();
         }
         return taskTables;
+    }
+    public static boolean Authorisation(String login, String password){
+        //Специальный лист, который записывается в таблицу
+        //Запрос для выдачи
+        String sql = "SELECT * FROM Users Where login = '"+login+"' AND password = '"+password+"';";
+        try {
+            ResultSet resultSet = statement.executeQuery(sql);
+           if(resultSet.next()){
+               return true;
+           }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }
