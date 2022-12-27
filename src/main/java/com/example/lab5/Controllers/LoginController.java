@@ -13,6 +13,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Collections;
+import java.util.Enumeration;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
@@ -29,10 +31,22 @@ public class LoginController implements Initializable {
         var login = txtLogin.getText();
         var password = txtPassword.getText();
         var ans = DataBase.Authorisation(login, password);
-        if(ans){
+        if(ans.size() > 0){
             Stage totalStage = (Stage) btnIn.getScene().getWindow();
             Stage stage = new Stage();
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+            ResourceBundle rb = new ResourceBundle() {
+                @Override
+                protected Object handleGetObject(String key) {
+                    return null;
+                }
+
+                @Override
+                public Enumeration<String> getKeys() {
+                    return Collections.enumeration(ans);
+                }
+            };
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"), rb);
+
             Scene scene = new Scene(fxmlLoader.load());
             stage.setTitle("Добавить абонемент");
             stage.setScene(scene);

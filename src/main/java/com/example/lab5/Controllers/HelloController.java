@@ -108,7 +108,7 @@ public class HelloController implements Initializable {
     public TextField txtHallQuery;
     public TextArea txtHallInfo;
     public Button btnDateDel;
-
+    public  String type;
 
     public void btnClientAddClick(ActionEvent actionEvent) throws IOException {
         Stage totalStage = (Stage) btnHallAdd.getScene().getWindow();
@@ -128,6 +128,26 @@ public class HelloController implements Initializable {
     TaskTable taskTableDel;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        type = resourceBundle.getKeys().nextElement();
+        if(type.equals("user")){
+            btnHallAdd.setDisable(true);
+            btnCardAdd.setDisable(true);
+            btnCardDelete.setDisable(true);
+            btnCardEdit.setDisable(true);
+            btnClientAdd.setDisable(true);
+            btnClientDelete.setDisable(true);
+            btnServiceAdd.setDisable(true);
+            btnClientEdit.setDisable(true);
+            btnHallDelete.setDisable(true);
+            btnServiceAdd.setDisable(true);
+            btnServiceDelete.setDisable(true);
+            btnServiceEdit.setDisable(true);
+            btnStaffAdd.setDisable(true);
+            btnStaffDelete.setDisable(true);
+            btnStaffEdit.setDisable(true);
+            btnTaskAdd.setDisable(true);
+            btnTaskDelete.setDisable(true);
+        }
         loadTable();
         TableView.TableViewSelectionModel<ClubCard> selectionModel = tvClubCard.getSelectionModel();
         selectionModel.selectedItemProperty().addListener(new ChangeListener<ClubCard>() {

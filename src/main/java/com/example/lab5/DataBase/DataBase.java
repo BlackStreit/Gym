@@ -3,6 +3,7 @@ package com.example.lab5.DataBase;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Enumeration;
 import java.util.List;
 
 import com.example.lab5.Classes.*;
@@ -41,6 +42,11 @@ public class DataBase {
         }
         try {
             statement.executeUpdate("DROP TABLE Service");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            statement.executeUpdate("DROP TABLE Users");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -138,11 +144,13 @@ public class DataBase {
         sql = "CREATE TABLE IF NOT EXISTS Users (\n" +
                 "id integer PRIMARY KEY AUTOINCREMENT,\n" +
                 "login text UNIQUE ,\n" +
-                "password integer\n" +
-                ");";
+                "password integer, \n" +
+                "type text);";
         try {
             statement.executeUpdate(sql);
-            //sql = "Insert INTO Users (login, password) VALUES('login', 'password')";
+            //sql = "Insert INTO Users (login, password, type) VALUES('admin', 'admin', 'admin')";
+            //statement.executeUpdate(sql);
+            //sql = "Insert INTO Users (login, password, type) VALUES('user', 'user', 'user')";
             //statement.executeUpdate(sql);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -830,14 +838,15 @@ public class DataBase {
         }
         return taskTables;
     }
-    public static boolean Authorisation(String login, String password){
+    public static ArrayList<String> Authorisation(String login, String password){
         //Специальный лист, который записывается в таблицу
         //Запрос для выдачи
+        ArrayList<String> type = new ArrayList<>();
         String sql = "SELECT * FROM Users Where login = '"+login+"' AND password = '"+password+"';";
         try {
             ResultSet resultSet = statement.executeQuery(sql);
            if(resultSet.next()){
-               return true;
+               type.add(resultSet.getString("type"));
            }
 
         } catch (SQLException e) {
@@ -845,6 +854,6 @@ public class DataBase {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return false;
+        return type;
     }
 }

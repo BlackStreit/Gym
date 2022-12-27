@@ -9,6 +9,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Enumeration;
+import java.util.ResourceBundle;
 
 public class HelloApplication extends Application {
     @Override
