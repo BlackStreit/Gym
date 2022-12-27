@@ -109,6 +109,7 @@ public class HelloController implements Initializable {
     public TextArea txtHallInfo;
     public Button btnDateDel;
     public  String type;
+    public TabPane tabPane;
 
     public void btnClientAddClick(ActionEvent actionEvent) throws IOException {
         Stage totalStage = (Stage) btnHallAdd.getScene().getWindow();
@@ -130,6 +131,14 @@ public class HelloController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         type = resourceBundle.getKeys().nextElement();
         if(type.equals("user")){
+            for (var tab:
+                    tabPane.getTabs()) {
+                if(!tab.getId().equals("tab3")){
+                    tab.setDisable(true);
+
+                }
+            }
+            tabPane.getSelectionModel().select(2);
             btnHallAdd.setDisable(true);
             btnCardAdd.setDisable(true);
             btnCardDelete.setDisable(true);

@@ -842,7 +842,7 @@ public class DataBase {
         //Специальный лист, который записывается в таблицу
         //Запрос для выдачи
         ArrayList<String> type = new ArrayList<>();
-        String sql = "SELECT * FROM Users Where login = '"+login+"' AND password = '"+password+"';";
+        String sql = "SELECT * FROM Users Where login = '"+login+"' AND password = '"+password+"'";
         try {
             ResultSet resultSet = statement.executeQuery(sql);
            if(resultSet.next()){
